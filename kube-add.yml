@@ -1,0 +1,53 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: jual-service
+  namespace: production
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  #type: LoadBalancer
+  selector:
+    app: jual
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jual-deploy
+  namespace: production
+spec:
+  selector:
+    matchLabels:
+      app: jual
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: jual
+    spec:
+      containers:
+      - name: php-jual
+        image: farman17/aplikasi-penjualanku
+        ports:
+          - containerPort: 80
+   
+
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: jual-ingress
+  namespace: production
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - host: penjualan.dailybugis.my.id
+    http:
+      paths:
+      #- path: /
+      - backend:
+          serviceName: jual-service
+          servicePort: 80
+
