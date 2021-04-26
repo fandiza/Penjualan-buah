@@ -39,7 +39,7 @@
 									<i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
 									Profile
 								</a>
-								<a class="dropdown-item" href="<?= base_url('logout') ?>">
+								<a class="dropdown-item" href="<?= base_url('ubahpassword') ?>">
 									<i class="fas fa-lock fa-sm fa-fw mr-2 text-gray-400"></i>
 									Ubah Password
 								</a>

@@ -35,7 +35,7 @@
 											<label for="nama"><strong>Nama Supplier</strong></label>
 											</div>
 											<div class="form-group col-md-6">
-											<input type="text" name="nama_sup" placeholder="Masukkan Nama supplier" autocomplete="off"  class="form-control" required value="<?= $supplier->nama ?>">
+											<input type="text" name="nama_sup" placeholder="Masukkan Nama supplier" autocomplete="off"  class="form-control" required value="<?= $supplier->nama_sup ?>">
 										</div>
 									</div>
 									<div class="form-row">

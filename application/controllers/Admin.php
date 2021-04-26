@@ -5,7 +5,7 @@ use Dompdf\Dompdf;
 class admin extends CI_Controller{
 	public function __construct(){
 		parent::__construct();
-		// if($this->session->login['level'] != 'kasir' && $this->session->login['level'] != 'admin') redirect();
+		if($this->session->login['level'] != 'kasir' && $this->session->login['level'] != 'admin') redirect();
 		$this->data['aktif'] = 'admin';
 		$this->load->model('M_user', 'm_user');
 	}

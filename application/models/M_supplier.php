@@ -35,6 +35,8 @@ class M_supplier extends CI_Model{
 	}
 
 	public function hapus($id_supplier){
+		$this->db->delete(barang_masuk, ['id_supplier' => $id_supplier]);
 		return $this->db->delete($this->_table, ['id_supplier' => $id_supplier]);
+		
 	}
 }
