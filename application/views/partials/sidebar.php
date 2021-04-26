@@ -1,7 +1,7 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 			<a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?= base_url('dashboard') ?>">
 				<div class="sidebar-brand-icon rotate-n-10">
-				<i class="fab fa-apple"></i>
+				<i class="fas fa-apple-alt"></i>
 				</div>
 				<div class="sidebar-brand-text mx-3">TOKO BUAH BENING</div>
 			</a>
@@ -23,6 +23,12 @@
 					<span>Barang</span></a>
 			</li>
 
+			<li class="nav-item <?= $aktif == 'supplier' ? 'active' : '' ?>">
+				<a class="nav-link" href="<?= base_url('supplier') ?>">
+					<i class="fas fa-fw fa-box"></i>
+					<span>Supplier</span></a>
+			</li>
+
 			<li class="nav-item <?= $aktif == 'kasir' ? 'active' : '' ?>">
 				<a class="nav-link" href="<?= base_url('kasir') ?>">
 					<i class="fas fa-fw fa-cash-register"></i>
@@ -42,15 +48,21 @@
 					<span>Transaksi Penjualan</span></a>
 			</li>
 
+			<li class="nav-item <?= $aktif == 'barangmasuk' ? 'active' : '' ?>">
+				<a class="nav-link" href="<?= base_url('barangmasuk') ?>">
+					<i class="fas fa-fw fa-file-invoice"></i>
+					<span>Barang Masuk</span></a>
+			</li>
+
 			<hr class="sidebar-divider">
-			<?php if ($this->session->login['role'] == 'admin'): ?>
+			<?php if ($this->session->login['level'] == 'admin'): ?>
 				<!-- Heading -->
 				<div class="sidebar-heading">
 					Pengaturan
 				</div>
 
-				<li class="nav-item <?= $aktif == 'pengguna' ? 'active' : '' ?>">
-					<a class="nav-link" href="<?= base_url('pengguna') ?>">
+				<li class="nav-item <?= $aktif == 'admin' ? 'active' : '' ?>">
+					<a class="nav-link" href="<?= base_url('admin') ?>">
 						<i class="fas fa-fw fa-users"></i>
 						<span>Manajemen Admin</span></a>
 				</li>

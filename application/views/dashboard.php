@@ -135,8 +135,8 @@
 								<input type="text" value="<?= $this->session->login['nama'] ?>" readonly class="form-control mt-2 mb-2">
 								<strong>Username : </strong><br>
 								<input type="text" value="<?= $this->session->login['username'] ?>" readonly class="form-control mt-2 mb-2">
-								<strong>Role : </strong><br>
-								<input type="text" value="<?= $this->session->login['role'] ?>" readonly class="form-control mt-2 mb-2">
+								<strong>Level : </strong><br>
+								<input type="text" value="<?= $this->session->login['level'] ?>" readonly class="form-control mt-2 mb-2">
 								<strong>Jam Login : </strong><br>
 								<input type="text" value="<?= $this->session->login['jam_masuk'] ?>" readonly class="form-control mt-2">
 							</div>				

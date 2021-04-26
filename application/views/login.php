@@ -9,7 +9,7 @@
 	<meta name="description" content="">
 	<meta name="author" content="">
 
-	<title>SB Admin 2 - Login</title>
+	<title>Toko Buah Bening</title>
 	<link href="<?= base_url('sb-admin') ?>/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 	<link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 	<link href="<?= base_url('sb-admin') ?>/css/sb-admin-2.min.css" rel="stylesheet">
@@ -58,13 +58,6 @@
 										</div>
 										<div class="form-group">
 											<input type="password" class="form-control" id="password" placeholder="Masukkan Password" required name="password">
-										</div>
-										<div class="form-group">
-											<select name="role" id="role" class="form-control" required>
-												<option value="">Masuk Sebagai</option>
-												<option value="kasir">Kasir</option>
-												<option value="admin">Admin</option>
-											</select>
 										</div>
 										<button type="submit" class="btn btn-primary btn-block" name="login">
 											Login

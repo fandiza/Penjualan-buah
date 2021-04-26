@@ -57,6 +57,7 @@
 								<tbody>
 									<?php foreach ($all_penjualan as $penjualan): ?>
 										<tr>
+										
 											<td><?= $penjualan->no_penjualan ?></td>
 											<td><?= $penjualan->nama_kasir ?></td>
 											<td><?= $penjualan->tgl_penjualan ?> Pukul <?= $penjualan->jam_penjualan ?></td>

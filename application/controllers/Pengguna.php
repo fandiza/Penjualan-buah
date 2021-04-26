@@ -5,13 +5,13 @@ use Dompdf\Dompdf;
 class Pengguna extends CI_Controller {
 	public function __construct(){
 		parent::__construct();
-		if($this->session->login['role'] != 'kasir' && $this->session->login['role'] != 'admin') redirect();
+		if($this->session->login['level'] != 'kasir' && $this->session->login['level'] != 'admin') redirect();
 		$this->data['aktif'] = 'pengguna';
 		$this->load->model('M_pengguna', 'm_pengguna');
 	}
 
 	public function index(){
-		if ($this->session->login['role'] == 'kasir'){
+		if ($this->session->login['level'] == 'kasir'){
 			$this->session->set_flashdata('error', 'Managemen Pengguna hanya untuk admin!');
 			redirect('penjualan');
 		}
@@ -24,7 +24,7 @@ class Pengguna extends CI_Controller {
 	}
 
 	public function tambah(){
-		if ($this->session->login['role'] == 'kasir'){
+		if ($this->session->login['level'] == 'kasir'){
 			$this->session->set_flashdata('error', 'Tambah data hanya untuk admin!');
 			redirect('penjualan');
 		}
@@ -35,7 +35,7 @@ class Pengguna extends CI_Controller {
 	}
 
 	public function proses_tambah(){
-		if ($this->session->login['role'] == 'kasir'){
+		if ($this->session->login['level'] == 'kasir'){
 			$this->session->set_flashdata('error', 'Tambah data hanya untuk admin!');
 			redirect('penjualan');
 		}
@@ -57,7 +57,7 @@ class Pengguna extends CI_Controller {
 	}
 
 	public function ubah($id){
-		if ($this->session->login['role'] == 'kasir'){
+		if ($this->session->login['level'] == 'kasir'){
 			$this->session->set_flashdata('error', 'Ubah data hanya untuk admin!');
 			redirect('penjualan');
 		}
@@ -69,7 +69,7 @@ class Pengguna extends CI_Controller {
 	}
 
 	public function proses_ubah($id){
-		if ($this->session->login['role'] == 'kasir'){
+		if ($this->session->login['level'] == 'kasir'){
 			$this->session->set_flashdata('error', 'Ubah data hanya untuk admin!');
 			redirect('penjualan');
 		}
@@ -91,7 +91,7 @@ class Pengguna extends CI_Controller {
 	}
 
 	public function hapus($id){
-		if ($this->session->login['role'] == 'kasir'){
+		if ($this->session->login['level'] == 'kasir'){
 			$this->session->set_flashdata('error', 'Ubah data hanya untuk admin!');
 			redirect('penjualan');
 		}

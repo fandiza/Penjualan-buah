@@ -2,20 +2,20 @@
 
 use Dompdf\Dompdf;
 
-class Kasir extends CI_Controller{
+class admin extends CI_Controller{
 	public function __construct(){
 		parent::__construct();
-		if($this->session->login['level'] != 'kasir' && $this->session->login['level'] != 'admin') redirect();
-		$this->data['aktif'] = 'kasir';
+		// if($this->session->login['level'] != 'kasir' && $this->session->login['level'] != 'admin') redirect();
+		$this->data['aktif'] = 'admin';
 		$this->load->model('M_user', 'm_user');
 	}
 
 	public function index(){
-		$this->data['title'] = 'Data Kasir';
-		$this->data['all_kasir'] = $this->m_user->lihat();
+		$this->data['title'] = 'Data admin';
+		$this->data['all_admin'] = $this->m_user->lihat();
 		$this->data['no'] = 1;
 
-		$this->load->view('kasir/lihat', $this->data);
+		$this->load->view('admin/lihat', $this->data);
 	}
 
 	public function tambah(){
@@ -24,9 +24,9 @@ class Kasir extends CI_Controller{
 			redirect('penjualan');
 		}
 
-		$this->data['title'] = 'Tambah Kasir';
+		$this->data['title'] = 'Tambah admin';
 
-		$this->load->view('kasir/tambah', $this->data);
+		$this->load->view('admin/tambah', $this->data);
 	}
 
 	public function proses_tambah(){
@@ -39,16 +39,16 @@ class Kasir extends CI_Controller{
 			
 			'nama' => $this->input->post('nama'),
 			'username' => $this->input->post('username'),
-			'password' => $this->input->post('password'),
+			'password' => md5($this->input->post('password')),
 			'level' => $this->input->post('level'),
 		];
 
 		if($this->m_user->tambah($data)){
-			$this->session->set_flashdata('success', 'Data Kasir <strong>Berhasil</strong> Ditambahkan!');
-			redirect('kasir');
+			$this->session->set_flashdata('success', 'Data admin <strong>Berhasil</strong> Ditambahkan!');
+			redirect('admin');
 		} else {
-			$this->session->set_flashdata('error', 'Data Kasir <strong>Gagal</strong> Ditambahkan!');
-			redirect('kasir');
+			$this->session->set_flashdata('error', 'Data admin <strong>Gagal</strong> Ditambahkan!');
+			redirect('admin');
 		}
 	}
 
@@ -58,10 +58,10 @@ class Kasir extends CI_Controller{
 			redirect('penjualan');
 		}
 
-		$this->data['title'] = 'Ubah Kasir';
-		$this->data['kasir'] = $this->m_user->lihat_id($id);
+		$this->data['title'] = 'Ubah admin';
+		$this->data['admin'] = $this->m_user->lihat_id($id);
 
-		$this->load->view('kasir/ubah', $this->data);
+		$this->load->view('admin/ubah', $this->data);
 	}
 
 	public function proses_ubah($id_user){
@@ -78,11 +78,11 @@ class Kasir extends CI_Controller{
 		];
 
 		if($this->m_user->ubah($data, $id_user)){
-			$this->session->set_flashdata('success', 'Data Kasir <strong>Berhasil</strong> Diubah!');
-			redirect('kasir');
+			$this->session->set_flashdata('success', 'Data admin <strong>Berhasil</strong> Diubah!');
+			redirect('admin');
 		} else {
-			$this->session->set_flashdata('error', 'Data Kasir <strong>Gagal</strong> Diubah!');
-			redirect('kasir');
+			$this->session->set_flashdata('error', 'Data admin <strong>Gagal</strong> Diubah!');
+			redirect('admin');
 		}
 	}
 
@@ -93,25 +93,25 @@ class Kasir extends CI_Controller{
 		}
 
 		if($this->m_user->hapus($id)){
-			$this->session->set_flashdata('success', 'Data Kasir <strong>Berhasil</strong> Dihapus!');
-			redirect('kasir');
+			$this->session->set_flashdata('success', 'Data admin <strong>Berhasil</strong> Dihapus!');
+			redirect('admin');
 		} else {
-			$this->session->set_flashdata('error', 'Data Kasir <strong>Gagal</strong> Dihapus!');
-			redirect('kasir');
+			$this->session->set_flashdata('error', 'Data admin <strong>Gagal</strong> Dihapus!');
+			redirect('admin');
 		}
 	}
 
 	public function export(){
 		$dompdf = new Dompdf();
 	
-		$this->data['all_kasir'] = $this->m_user->lihat();
-		$this->data['title'] = 'Laporan Data Kasir';
+		$this->data['all_admin'] = $this->m_user->lihat();
+		$this->data['title'] = 'Laporan Data admin';
 		$this->data['no'] = 1;
 
 		$dompdf->setPaper('A4', 'Landscape');
-		$html = $this->load->view('kasir/report', $this->data, true);
+		$html = $this->load->view('admin/report', $this->data, true);
 		$dompdf->load_html($html);
 		$dompdf->render();
-		$dompdf->stream('Laporan Data Kasir Tanggal ' . date('d F Y'), array("Attachment" => false));
+		$dompdf->stream('Laporan Data admin Tanggal ' . date('d F Y'), array("Attachment" => false));
 	}
 }

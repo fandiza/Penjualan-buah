@@ -35,10 +35,10 @@
 									<div class="form-row">
 										<div class="form-group col-2">
 											<label>No. Penjualan</label>
-											<input type="text" name="no_penjualan" value="PJ<?= time() ?>" readonly class="form-control">
+											<input type="text" name="no_penjualan" value="<?= date('Hisdmy') ?>" readonly class="form-control">
 										</div>
 									
-										<div class="form-group col-3">
+										<div class="form-group col-2">
 											<label>Nama Kasir</label>
 											<input type="text" name="nama_kasir" value="<?= $this->session->login['nama'] ?>" readonly class="form-control">
 										</div>

@@ -10,7 +10,7 @@
 		<?php $this->load->view('partials/sidebar.php') ?>
 
 		<div id="content-wrapper" class="d-flex flex-column">
-			<div id="content" data-url="<?= base_url('kasir') ?>">
+			<div id="content" data-url="<?= base_url('supplier') ?>">
 				<!-- load Topbar -->
 				<?php $this->load->view('partials/topbar.php') ?>
 
@@ -21,8 +21,8 @@
 					</div>
 					<div class="float-right">
 						<?php if ($this->session->login['level'] == 'admin'): ?>
-							<a href="<?= base_url('kasir/export') ?>" class="btn btn-danger btn-sm"><i class="fa fa-file-pdf"></i>&nbsp;&nbsp;Export</a>
-							<a href="<?= base_url('kasir/tambah') ?>" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i>&nbsp;&nbsp;Tambah</a>
+							<a href="<?= base_url('supplier/export') ?>" class="btn btn-danger btn-sm"><i class="fa fa-file-pdf"></i>&nbsp;&nbsp;Export</a>
+							<a href="<?= base_url('supplier/tambah') ?>" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i>&nbsp;&nbsp;Tambah</a>
 						<?php endif ?>
 					</div>
 				</div>
@@ -43,39 +43,37 @@
 					</div>
 				<?php endif ?>
 				<div class="card shadow">
-					<div class="card-header"><strong>Daftar Kasir</strong></div>
+					<div class="card-header"><strong>Daftar supplier</strong></div>
 					<div class="card-body">
 						<div class="table-responsive">
 							<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 								<thead>
 									<tr>
 										<td>No</td>
-										<td>Nama Kasir</td>
-										<td>Username</td>
-										<td>Terakhir Login</td>
+										<td>Nama supplier</td>
+										<td>No Telp</td>
+                                        <td>Alamat</td>
 										<?php if ($this->session->login['level'] == 'admin'): ?>
-											<td>Password</td>
+										
 											<td>Aksi</td>
 										<?php endif ?>
 									</tr>
 								</thead>
 								<tbody>
-									<?php foreach ($all_kasir as $kasir): ?>
-										<?php if($kasir->level == 'kasir') { ?>
+									<?php foreach ($all_supplier as $supplier): ?>
 										<tr>
 											<td><?= $no++ ?></td>
-											<td><?= $kasir->nama ?></td>
-											<td><?= $kasir->username ?></td>
-											<td><?= $kasir->last_login ?></td>
+											<td><?= $supplier->nama_sup ?></td>
+											<td><?= $supplier->no_telp ?></td>
+                                            <td><?= $supplier->alamat ?></td>
 											<?php if ($this->session->login['level'] == 'admin'): ?>
-												<td><?= $kasir->password ?></td>
+											
 												<td>
-													<a href="<?= base_url('kasir/ubah/' . $kasir->id_user) ?>" class="btn btn-success btn-sm"><i class="fa fa-pen"></i></a>
-													<a onclick="return confirm('apakah anda yakin?')" href="<?= base_url('kasir/hapus/' . $kasir->id_user) ?>" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+													<a href="<?= base_url('supplier/ubah/' . $supplier->id_supplier) ?>" class="btn btn-success btn-sm"><i class="fa fa-pen"></i></a>
+													<a onclick="return confirm('apakah anda yakin?')" href="<?= base_url('supplier/hapus/' . $supplier->id_supplier) ?>" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
 												</td>	
 											<?php endif ?>
 										</tr>
-										<?php } ?>
 									<?php endforeach ?>
 								</tbody>
 							</table>

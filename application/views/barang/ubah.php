@@ -29,7 +29,7 @@
 						<div class="card shadow">
 							<div class="card-header"><strong>Isi Form Dibawah Ini!</strong></div>
 							<div class="card-body">
-								<form action="<?= base_url('barang/proses_ubah/' . $barang->kode_barang) ?>" id="form-tambah" method="POST">
+								<form action="<?= base_url('barang/proses_ubah/' . $barang->id) ?>" id="form-tambah" method="POST">
 						
 								
 									<div class="form-row">
@@ -57,7 +57,7 @@
 											<label for="stok"><strong>Stok</strong></label>
 											</div>
 											<div class="form-group col-md-8">
-											<input type="number" name="stok" placeholder="Masukkan Stok" autocomplete="off"  class="form-control" required value="<?= $barang->stok ?>">
+											<input type="number" name="stok" placeholder="Masukkan Stok" autocomplete="off" class="form-control" required value="<?= $barang->stok ?>" readonly>
 										</div>
 										<div class="form-group col-md-4">
 											<label for="satuan"><strong>Satuan</strong></label>
@@ -71,6 +71,7 @@
 												
 											</select>
 										</div>
+										<input type="hidden" name="id" value="<?= $barang->id ?>">
 									</div>
 									<hr>
 									<div class="form-group">

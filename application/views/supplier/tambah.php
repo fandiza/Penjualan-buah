@@ -10,7 +10,7 @@
 		<?php $this->load->view('partials/sidebar.php') ?>
 
 		<div id="content-wrapper" class="d-flex flex-column">
-			<div id="content" data-url="<?= base_url('pengguna') ?>">
+			<div id="content" data-url="<?= base_url('supplier') ?>">
 				<!-- load Topbar -->
 				<?php $this->load->view('partials/topbar.php') ?>
 
@@ -20,7 +20,7 @@
 						<h1 class="h3 m-0 text-gray-800"><?= $title ?></h1>
 					</div>
 					<div class="float-right">
-						<a href="<?= base_url('pengguna') ?>" class="btn btn-secondary btn-sm"><i class="fa fa-reply"></i>&nbsp;&nbsp;Kembali</a>
+						<a href="<?= base_url('supplier') ?>" class="btn btn-secondary btn-sm"><i class="fa fa-reply"></i>&nbsp;&nbsp;Kembali</a>
 					</div>
 				</div>
 				<hr>
@@ -29,28 +29,27 @@
 						<div class="card shadow">
 							<div class="card-header"><strong>Isi Form Dibawah Ini!</strong></div>
 							<div class="card-body">
-								<form action="<?= base_url('pengguna/proses_tambah') ?>" id="form-tambah" method="POST">
+								<form action="<?= base_url('supplier/proses_tambah') ?>" id="form-tambah" method="POST">
 									<div class="form-row">
-									<div class="form-group col-md-4">
-											<label for="nama_pengguna"><strong>Nama Pengguna</strong></label>
+										<div class="form-group col-md-6">
+											<label for="nama"><strong>Nama Supplier</strong></label>
 											</div>
-											<div class="form-group col-md-8">
-											<input type="text" name="nama_pengguna" placeholder="Masukkan Nama Pengguna" autocomplete="off"  class="form-control" required>
+											<div class="form-group col-md-6">
+											<input type="text" name="nama_sup" placeholder="Masukkan Nama supplier" autocomplete="off"  class="form-control" required>
 										</div>
 									</div>
-									
 									<div class="form-row">
-										<div class="form-group col-md-4">
-											<label for="username_pengguna"><strong>Username</strong></label>
+										<div class="form-group col-md-6">
+											<label for="no_telp"><strong>No Telp</strong></label>
 											</div>
-											<div class="form-group col-md-8">
-											<input type="text" name="username_pengguna" placeholder="Masukkan Username" autocomplete="off"  class="form-control" required>
+											<div class="form-group col-md-6">
+										<input type="number" name="no_telp" placeholder="Masukkan No Telp" autocomplete="off"  class="form-control" required >
 										</div>
-										<div class="form-group col-md-4">
-											<label for="password_pengguna"><strong>Password</strong></label>
+										<div class="form-group col-md-6">
+											<label for="password_supplier"><strong>Alamat</strong></label>
 											</div>
-											<div class="form-group col-md-8">
-											<input type="text" name="password_pengguna" placeholder="Masukkan Password" autocomplete="off"  class="form-control" required>
+											<div class="form-group col-md-6">
+											<input type="text" name="alamat" placeholder="Masukkan alamat" autocomplete="off"  class="form-control" required>
 										</div>
 									</div>
 									<hr>
@@ -72,9 +71,9 @@
 	<?php $this->load->view('partials/js.php') ?>
 	<script>
 		$(document).ready(function(){
-			let username_pengguna = $('input[name="kode_pengguna"]').val().split(' - ');
-			username_pengguna = 'PGN' + username_pengguna[1]
-			 $('input[name="username_pengguna"]').val(username_pengguna)
+			let username_supplier = $('input[name="kode_supplier"]').val().split(' - ');
+			username_supplier = 'KSR' + username_supplier[1]
+			 $('input[name="username_supplier"]').val(username_supplier)
 		})
 	</script>
 </body>

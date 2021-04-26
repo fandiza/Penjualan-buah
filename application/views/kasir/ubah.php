@@ -29,7 +29,7 @@
 						<div class="card shadow">
 							<div class="card-header"><strong>Isi Form Dibawah Ini!</strong></div>
 							<div class="card-body">
-								<form action="<?= base_url('kasir/proses_ubah/' . $kasir->id) ?>" id="form-tambah" method="POST">
+								<form action="<?= base_url('kasir/proses_ubah/' . $kasir->id_user) ?>" id="form-tambah" method="POST">
 								
 										
 										
@@ -38,20 +38,21 @@
 											<label for="nama_kasir"><strong>Nama Kasir</strong></label>
 											</div>
 											<div class="form-group col-md-8">
-											<input type="text" name="nama_kasir" placeholder="Masukkan Nama Kasir" autocomplete="off"  class="form-control" required value="<?= $kasir->nama_kasir ?>">
+											<input type="text" name="nama" placeholder="Masukkan Nama Kasir" autocomplete="off"  class="form-control" required value="<?= $kasir->nama ?>">
 										</div>
 										<div class="form-group col-md-4">
 											<label for="username_kasir"><strong>Username</strong></label>
 											</div>
 											<div class="form-group col-md-8">
-											<input type="text" name="username_kasir" placeholder="Masukkan Username" autocomplete="off"  class="form-control" required value="<?= $kasir->username_kasir ?>" >
+											<input type="text" name="username" placeholder="Masukkan Username" autocomplete="off"  class="form-control" required value="<?= $kasir->username ?>" >
 										</div>
 										<div class="form-group col-md-4">
 											<label for="password_kasir"><strong>Password</strong></label>
 											</div>
 											<div class="form-group col-md-8">
-											<input type="text" name="password_kasir" placeholder="Masukkan Password" autocomplete="off"  class="form-control" required value="<?= $kasir->password_kasir ?>">
+											<input type="text" name="password" placeholder="Masukkan Password" autocomplete="off"  class="form-control" required value="<?= $kasir->password ?>">
 										</div>
+										<input type="hidden" name="level" value="kasir">
 									</div>
 									<hr>
 									<div class="form-group">

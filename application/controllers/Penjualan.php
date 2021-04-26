@@ -5,7 +5,7 @@ use Dompdf\Dompdf;
 class Penjualan extends CI_Controller {
 	public function __construct(){
 		parent::__construct();
-		if($this->session->login['role'] != 'kasir' && $this->session->login['role'] != 'admin') redirect();
+		if($this->session->login['level'] != 'kasir' && $this->session->login['level'] != 'admin') redirect();
 		date_default_timezone_set('Asia/Jakarta');
 		$this->load->model('M_barang', 'm_barang');
 		$this->load->model('M_penjualan', 'm_penjualan');

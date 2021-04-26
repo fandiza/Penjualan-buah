@@ -10,7 +10,7 @@
 		<?php $this->load->view('partials/sidebar.php') ?>
 
 		<div id="content-wrapper" class="d-flex flex-column">
-			<div id="content" data-url="<?= base_url('pengguna') ?>">
+			<div id="content" data-url="<?= base_url('admin') ?>">
 				<!-- load Topbar -->
 				<?php $this->load->view('partials/topbar.php') ?>
 
@@ -20,8 +20,10 @@
 						<h1 class="h3 m-0 text-gray-800"><?= $title ?></h1>
 					</div>
 					<div class="float-right">
-						<a href="<?= base_url('pengguna/export') ?>" class="btn btn-danger btn-sm"><i class="fa fa-file-pdf"></i>&nbsp;&nbsp;Export</a>
-						<a href="<?= base_url('pengguna/tambah') ?>" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i>&nbsp;&nbsp;Tambah</a>
+						<?php if ($this->session->login['level'] == 'admin'): ?>
+							<a href="<?= base_url('admin/export') ?>" class="btn btn-danger btn-sm"><i class="fa fa-file-pdf"></i>&nbsp;&nbsp;Export</a>
+							<a href="<?= base_url('admin/tambah') ?>" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i>&nbsp;&nbsp;Tambah</a>
+						<?php endif ?>
 					</div>
 				</div>
 				<hr>
@@ -41,33 +43,39 @@
 					</div>
 				<?php endif ?>
 				<div class="card shadow">
-					<div class="card-header"><strong>Daftar Pengguna</strong></div>
+					<div class="card-header"><strong>Daftar admin</strong></div>
 					<div class="card-body">
 						<div class="table-responsive">
 							<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 								<thead>
 									<tr>
 										<td>No</td>
-										
-										<td>Nama Pengguna</td>
+										<td>Nama admin</td>
 										<td>Username</td>
-										<td>Password</td>
-										<td>Aksi</td>
+										<td>Terakhir Login</td>
+										<?php if ($this->session->login['level'] == 'admin'): ?>
+										
+											<td>Aksi</td>
+										<?php endif ?>
 									</tr>
 								</thead>
 								<tbody>
-									<?php foreach ($all_pengguna as $pengguna): ?>
+									<?php foreach ($all_admin as $admin): ?>
+										<?php if($admin->level == 'admin') { ?>
 										<tr>
 											<td><?= $no++ ?></td>
-										
-											<td><?= $pengguna->nama_pengguna ?></td>
-											<td><?= $pengguna->username_pengguna ?></td>
-											<td><?= $pengguna->password_pengguna ?></td>
-											<td>
-												<a href="<?= base_url('pengguna/ubah/' . $pengguna->id) ?>" class="btn btn-success btn-sm"><i class="fa fa-pen"></i></a>
-												<a onclick="return confirm('apakah anda yakin?')" href="<?= base_url('pengguna/hapus/' . $pengguna->id) ?>" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
-											</td>
+											<td><?= $admin->nama ?></td>
+											<td><?= $admin->username ?></td>
+											<td><?= $admin->last_login ?></td>
+											<?php if ($this->session->login['level'] == 'admin'): ?>
+												
+												<td>
+													<a href="<?= base_url('admin/ubah/' . $admin->id_user) ?>" class="btn btn-success btn-sm"><i class="fa fa-pen"></i></a>
+													<a onclick="return confirm('apakah anda yakin?')" href="<?= base_url('admin/hapus/' . $admin->id_user) ?>" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+												</td>	
+											<?php endif ?>
 										</tr>
+										<?php } ?>
 									<?php endforeach ?>
 								</tbody>
 							</table>
