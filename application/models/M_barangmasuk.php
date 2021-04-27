@@ -36,6 +36,10 @@ class M_barangmasuk extends CI_Model {
 		$query = $this->db->get($this->_table);
 		return $query->row();
 	}
+	public function jumlahbm(){
+		$query = $this->db->get($this->_table);
+		return $query->num_rows();
+	}
 
 	public function tambah($data){
 		return $this->db->insert($this->_table, $data);

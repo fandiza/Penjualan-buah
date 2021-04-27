@@ -31,7 +31,7 @@
                         <div class="col-lg -9">
                             <div class="p-5">
                                 <div class="text-center">
-                                    <h1 class="h5 text-primary">Masuk</h1>
+                                    <h1 class="h5 text-success">Masuk</h1>
                                 </div>
                                 <div class="nav-link">
                                     <!-- <center>
@@ -45,14 +45,14 @@
 										<div class="form-group">
 											<input type="password" class="form-control" id="password" placeholder="Masukkan Password" required name="password">
 										</div>
-										<button type="submit" class="btn btn-primary btn-block" name="login">
+										<button type="submit" class="btn btn-success btn-block" name="login">
 											Login
 										</button>
 									</form>
                                     <hr>
-                                    <div class="text-center">
+                                    <!-- <div class="text-center">
                                         <a class="small" href="<?= base_url('beranda'); ?>">Beranda</a>
-                                    </div>
+                                    </div> -->
                                     <!-- <div class="text-center">
                                         <a class="small" href="<?= base_url('auth/forgotPassword'); ?>">Lupa
                                             Kata Sandi ?</a>
@@ -78,7 +78,7 @@
 	<script src="<?= base_url('sb-admin') ?>/vendor/jquery-easing/jquery.easing.min.js"></script>
 	<script src="<?= base_url('sb-admin') ?>/js/sb-admin-2.min.js"></script>
 </body>
-<body background="<?= base_url(); ?>./assets/batik2.png">
+<body background="<?= base_url(); ?>./assets/back.jpeg">
 
 <style>
     .bg-login-image {

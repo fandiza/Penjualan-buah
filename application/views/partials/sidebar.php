@@ -1,17 +1,18 @@
-<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+<ul class="navbar-nav bg-gradient sidebar sidebar-dark accordion" id="accordionSidebar" style="background-color:#317745">
 			<a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?= base_url('dashboard') ?>">
 				<div class="sidebar-brand-icon rotate-n-10">
-				<i class="fas fa-apple-alt"></i>
+				<img src="<?= base_url(); ?>assets/buah.png" alt="" width="90%">
 				</div>
-				<div class="sidebar-brand-text mx-3">TOKO BUAH BENING</div>
+				<div class="sidebar-brand-text mx-3 mt">    </div>
 			</a>
-			<hr class="sidebar-divider my-0">
+			<hr class="sidebar-divider my-2">
 			<li class="nav-item <?= $aktif == 'dashboard' ? 'active' : '' ?>">
 				<a class="nav-link" href="<?= base_url('dashboard') ?>">
+				<!-- <hr class="sidebar-divider my-1"> -->
 					<i class="fas fa-fw fa-tachometer-alt"></i>
 					<span>Dashboard</span></a>
 			</li>
-			<hr class="sidebar-divider">
+			<hr class="sidebar-divider my-2s">
 
 			<div class="sidebar-heading">
 				MANAJEMEN
@@ -25,13 +26,13 @@
 
 			<li class="nav-item <?= $aktif == 'supplier' ? 'active' : '' ?>">
 				<a class="nav-link" href="<?= base_url('supplier') ?>">
-					<i class="fas fa-fw fa-box"></i>
+					<i class="fas fa-fw fa-people-carry"></i>
 					<span>Supplier</span></a>
 			</li>
 
 			<li class="nav-item <?= $aktif == 'kasir' ? 'active' : '' ?>">
 				<a class="nav-link" href="<?= base_url('kasir') ?>">
-					<i class="fas fa-fw fa-cash-register"></i>
+					<i class="fas fa-fw fa-user"></i>
 					<span>Kasir</span></a>
 			</li>
 
@@ -44,7 +45,7 @@
 
 			<li class="nav-item <?= $aktif == 'penjualan' ? 'active' : '' ?>">
 				<a class="nav-link" href="<?= base_url('penjualan') ?>">
-					<i class="fas fa-fw fa-file-invoice"></i>
+					<i class="fas fa-fw fa-cash-register"></i>
 					<span>Transaksi Penjualan</span></a>
 			</li>
 
@@ -63,13 +64,13 @@
 
 				<li class="nav-item <?= $aktif == 'admin' ? 'active' : '' ?>">
 					<a class="nav-link" href="<?= base_url('admin') ?>">
-						<i class="fas fa-fw fa-users"></i>
+						<i class="fas fa-fw fa-user-cog"></i>
 						<span>Manajemen Admin</span></a>
 				</li>
 
 				<li class="nav-item <?= $aktif == 'toko' ? 'active' : '' ?>">
 					<a class="nav-link" href="<?= base_url('toko') ?>">
-						<i class="fas fa-fw fa-building"></i>
+						<i class="fas fa-store"></i>
 						<span>Profil Toko</span></a>
 				</li>
 				<!-- Divider -->
