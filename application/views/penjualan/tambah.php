@@ -62,13 +62,13 @@
 													<option value="<?= $barang->nama_barang ?>"><?= $barang->nama_barang ?></option>
 												<?php endforeach ?>
 											</select>
-										</div>
+										 </div>
 									
-										<div class="form-group col-2">
+											<div class="form-group col-2">
 											<label>Harga Barang</label>
 											<input type="text" name="harga_barang" value="" readonly class="form-control">
-										</div>
-										<div class="form-group col-2">
+											</div>
+											<div class="form-group col-2">
 											<label>Jumlah</label>
 											<input type="number" name="jumlah" value="" class="form-control" readonly min='1'>
 										</div>

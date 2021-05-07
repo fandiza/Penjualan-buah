@@ -60,7 +60,7 @@
 										
 											<td><?= $penjualan->no_penjualan ?></td>
 											<td><?= $penjualan->nama_kasir ?></td>
-											<td><?= $penjualan->tgl_penjualan ?> Pukul <?= $penjualan->jam_penjualan ?></td>
+											<td><?= format_indo($penjualan->tgl_penjualan) ?> Pukul <?= $penjualan->jam_penjualan ?></td>
 											<td>Rp <?= number_format($penjualan->total, 0, ',', '.') ?></td>
 											<td>
 												<a href="<?= base_url('penjualan/detail/' . $penjualan->no_penjualan) ?>" class="btn btn-success btn-sm"><i class="fa fa-eye"></i></a>

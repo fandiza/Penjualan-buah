@@ -55,14 +55,14 @@
 									<div class="form-row">
 										<div class="form-group col-md-4">
 											<label for="stok"><strong>Stok</strong></label>
-											</div>
-											<div class="form-group col-md-8">
+										</div>
+										<div class="form-group col-md-8">
 											<input type="number" name="stok" placeholder="" autocomplete="off"  class="form-control" required readonly>
 										</div>
 										<div class="form-group col-md-4">
 											<label for="satuan"><strong>Satuan</strong></label>
-											</div>
-											<div class="form-group col-md-8">
+										</div>
+										<div class="form-group col-md-8">
 											<select name="satuan" id="satuan" class="form-control" required>
 												<option value="">-- Silahkan Pilih --</option>
 												<option value="pcs">PCS</option>
@@ -70,11 +70,10 @@
 												<option value="kg">KILOGRAM</option>
 											</select>
 										</div>
-									</div>
 									<hr>
 									<div class="form-group">
 										<button type="submit" class="btn btn-primary"><i class="fa fa-save"></i>&nbsp;&nbsp;Simpan</button>
-										<button type="reset" class="btn btn-danger"><i class="fa fa-times"></i>&nbsp;&nbsp;Batal</button>
+										<button type="reset" class="btn btn-danger"><i class="fa fa-times"></i>&nbsp;&nbsp;Reset</button>
 									</div>
 								</form>
 							</div>				
