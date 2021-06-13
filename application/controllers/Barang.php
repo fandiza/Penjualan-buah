@@ -8,12 +8,37 @@ class Barang extends CI_Controller{
 		if($this->session->login['level'] != 'kasir' && $this->session->login['level'] != 'admin') redirect();
 		$this->data['aktif'] = 'barang';
 		$this->load->model('M_barang', 'm_barang');
+		$this->load->model('M_barangmasuk', 'm_barangmasuk');
 	}
 
 	public function index(){
 		$this->data['title'] = 'Data Barang';
-		$this->data['all_barang'] = $this->m_barang->lihat();
+		$this->data['all_barang'] = [];
+		$databarang = $this->m_barang->lihat();
+		foreach ($databarang as $key_all_barang => $value_all_barang) {
+			$data_pengurangan = 0;
+			$value_all_barang->total_barang_masuk = $this->m_barangmasuk->jumlah_barang_masuk_all_by_id($value_all_barang->id);
+			$value_all_barang->total_barang_masuk_sudah_exp = $this->m_barangmasuk->jumlah_barang_masuk_sudah_exp_by_id($value_all_barang->id, date('Y-m-d'));
+			$value_all_barang->total_barang_masuk_belum_exp = $this->m_barangmasuk->jumlah_barang_masuk_belum_exp_by_id($value_all_barang->id, date('Y-m-d'));
+
+			$value_all_barang->barang_masuk = [];
+			$data_value_all_barang = $this->m_barangmasuk->lihat_barang_yang_belum_exp_by_id(date('Y-m-d'), $value_all_barang->id);
+
+			foreach ($data_value_all_barang as $key_barang_masuk => $value_barang_masuk) {
+				$value_barang_masuk->sisa_hari = date_diff(date_create($value_barang_masuk->exp), date_create())->d;
+				$data_pengurangan = $value_all_barang->stok - $value_barang_masuk->jumlah;
+				$value_barang_masuk->jumlah_pengurangan = $data_pengurangan;
+
+				// if ($data_pengurangan > 0) {
+					$value_all_barang->barang_masuk[] = $value_barang_masuk;
+				// }
+			}
+			$this->data['all_barang'][] = $value_all_barang;
+		}
 		$this->data['no'] = 1;
+
+		// echo "<pre>";
+		// print_r($this->data);die();
 
 		$this->load->view('barang/lihat', $this->data);
 	}
@@ -41,6 +66,7 @@ class Barang extends CI_Controller{
 			'harga_beli' => $this->input->post('harga_beli'),
 			'harga_jual' => $this->input->post('harga_jual'),
 			'stok' => $this->input->post('stok'),
+			'stok' => $this->input->post('stok_awal'),
 			'satuan' => $this->input->post('satuan'),
 		];
 
@@ -77,6 +103,7 @@ class Barang extends CI_Controller{
 			'harga_beli' => $this->input->post('harga_beli'),
 			'harga_jual' => $this->input->post('harga_jual'),
 			'stok' => $this->input->post('stok'),
+			'stok' => $this->input->post('stok_awal'),
 			'satuan' => $this->input->post('satuan'),
 		];
 

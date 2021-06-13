@@ -34,4 +34,5 @@ class M_laporanharian extends CI_Model {
 
         return $this->db->query($query)->result_array();
     }
+    
 }

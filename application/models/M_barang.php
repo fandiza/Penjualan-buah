@@ -13,9 +13,17 @@ class M_barang extends CI_Model{
 		return $query->num_rows();
 	}
 
-	public function lihat_stok(){
-		$query = $this->db->get_where($this->_table, 'stok > 1');
-		return $query->result();
+	public function lihat_stok($custom_where = null){
+		if (empty($custom_where)) {
+			$query = $this->db->get_where($this->_table, 'stok > 1');
+			return $query->result();
+		}else{
+			$query = $this->db
+					->where('stok > 1')
+					->where($custom_where)
+					->get($this->_table);
+			return $query->result();
+		}
 	}
 
 	public function lihat_id($id){
@@ -58,6 +66,7 @@ class M_barang extends CI_Model{
 
 	public function ubah_stok($stok, $id){
 		$query = $this->db->set('stok', $stok);
+		$query = $this->db->set('stok_utama', $stok);		
 		$query = $this->db->where(['id' => $id]);
 		$query = $this->db->update($this->_table);
 		return $query;

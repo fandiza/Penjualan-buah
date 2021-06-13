@@ -33,6 +33,21 @@
 				</select>
 				</div>
 				<div class="row">
+				<div class="col-xl-3 col-md-6 mb-4">
+		              <div class="card border-left-warning shadow h-100 py-2">
+		                <div class="card-body">
+		                  <div class="row no-gutters align-items-center">
+		                    <div class="col mr-2">
+		                      <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Modal</div>
+		                      <div id="stok" class="h5 mb-0 font-weight-bold text-gray-800">Rp <?= number_format($total['modal'],0,',','.')?></div>
+		                    </div>
+		                    <div class="col-auto">
+		                      <i class="fas fa-file-invoice fa-2x text-gray-300"></i>
+		                    </div>
+		                  </div>
+		                </div>
+		              </div>
+		    		</div>
 		            <!-- Earnings (Monthly) Card Example -->
 		            <div class="col-xl-3 col-md-6 mb-4">
 		              <div class="card border-left-primary shadow h-100 py-2">
@@ -40,7 +55,7 @@
 		                  <div class="row no-gutters align-items-center">
 		                    <div class="col mr-2">
 		                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Pendapatan Kotor</div>
-		                      <div id="laba_kotor" class="h5 mb-0 font-weight-bold text-gray-800">Rp. <?= $total['laba_kotor']?></div>
+		                      <div id="laba_kotor" class="h5 mb-0 font-weight-bold text-gray-800">Rp <?= number_format($total['laba_kotor'],0,',','.') ?></div>
 		                    </div>
 		                    <div class="col-auto">
 		                      <i class="fas fa-box fa-2x text-gray-300"></i>
@@ -50,26 +65,7 @@
 		              </div>
 		            </div>
 
-		            <!-- Earnings (Monthly) Card Example -->
-		            <div class="col-xl-3 col-md-6 mb-4">
-		              <div class="card border-left-success shadow h-100 py-2">
-		                <div class="card-body">
-		                  <div class="row no-gutters align-items-center">
-		                    <div class="col mr-2">
-		                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Pendapatan Bersih</div>
-		                      <div id="laba_bersih" class="h5 mb-0 font-weight-bold text-gray-800">Rp.  <?= $total['laba_bersih']?></div>
-		                    </div>
-		                    <div class="col-auto">
-		                      <i class="fas fa-user fa-2x text-gray-300"></i>
-							  
-		                    </div>
-		                  </div>
-		                </div>
-		              </div>
-		            </div>
-
-		            <!-- Earnings (Monthly) Card Example -->
-		            <div class="col-xl-3 col-md-6 mb-4">
+					<div class="col-xl-3 col-md-6 mb-4">
 		              <div class="card border-left-info shadow h-100 py-2">
 		                <div class="card-body">
 		                  <div class="row no-gutters align-items-center">
@@ -90,22 +86,29 @@
 		              </div>
 		          	 </div>
 
-		            	<!-- Pending Requests Card Example -->
-		            	<div class="col-xl-3 col-md-6 mb-4">
-		              <div class="card border-left-warning shadow h-100 py-2">
+		            <!-- Earnings (Monthly) Card Example -->
+		            <div class="col-xl-3 col-md-6 mb-4">
+		              <div class="card border-left-success shadow h-100 py-2">
 		                <div class="card-body">
 		                  <div class="row no-gutters align-items-center">
 		                    <div class="col mr-2">
-		                      <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Sisa Stok Barang</div>
-		                      <div id="stok" class="h5 mb-0 font-weight-bold text-gray-800"> <?= $total['modal']?></div>
+		                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Pendapatan Bersih</div>
+		                      <div id="laba_bersih" class="h5 mb-0 font-weight-bold text-gray-800">Rp <?= number_format($total['laba_bersih'],0,',','.')?></div>
 		                    </div>
 		                    <div class="col-auto">
-		                      <i class="fas fa-file-invoice fa-2x text-gray-300"></i>
+		                      <i class="fas fa-user fa-2x text-gray-300"></i>
+							  
 		                    </div>
 		                  </div>
 		                </div>
 		              </div>
-		    		</div>
+		            </div>
+
+		            <!-- Earnings (Monthly) Card Example -->
+		            
+
+		            	<!-- Pending Requests Card Example -->
+		            
 		        	</div>
 				</div>
 			</div>
@@ -126,10 +129,10 @@
 				xmlHttp.onload = function(){
 					if(this.status = 200){
 						const result = JSON.parse(xmlHttp.response);
-						document.getElementById("laba_kotor").innerHTML = "Rp. " + result['laba_kotor'];
-						document.getElementById("laba_bersih").innerHTML = "Rp. " + result['laba_bersih'];
+						document.getElementById("laba_kotor").innerHTML = "Rp " + number_format(result['laba_kotor'],0,',','.');
+						document.getElementById("laba_bersih").innerHTML = "Rp " + number_format(result['laba_bersih'],0,',','.');
 						document.getElementById("total_penjualan").innerHTML = result['barang_terjual'];
-						document.getElementById("stok").innerHTML = result['modal'];
+						document.getElementById("stok").innerHTML = "Rp " + number_format(result['modal'],0,',','.');
 					}
 				}
 				xmlHttp.send();
@@ -142,7 +145,7 @@
 						document.getElementById("laba_kotor").innerHTML = "Rp. " + result['laba_kotor'];
 						document.getElementById("laba_bersih").innerHTML = "Rp. " + result['laba_bersih'];
 						document.getElementById("total_penjualan").innerHTML = result['barang_terjual'];
-						document.getElementById("stok").innerHTML = result['modal'];
+						document.getElementById("stok").innerHTML = "Rp. " + result['modal'];
 					}
 				}
 				xmlHttp.send();

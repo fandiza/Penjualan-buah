@@ -78,4 +78,62 @@ class M_barangmasuk extends CI_Model {
 		$hasil = $query->row();
 		return $hasil->jumlah;
 	}
+
+	public function jumlah_barang_masuk_all_by_id($id)
+	{
+		$this->db->select_sum('jumlah');
+		$result = $this->db->get_where($this->_table, ['id_barang' => $id])->row();
+		return $result->jumlah;
+	}
+
+	public function jumlah_barang_masuk_sudah_exp_by_id($id, $date)
+	{
+		$this->db->select_sum('jumlah');
+		$result = $this->db
+			->where('id_barang' , $id)
+			->where('exp <=', $date)
+			->get($this->_table)
+			->row();
+		return $result->jumlah;
+	}
+
+	public function jumlah_barang_masuk_belum_exp_by_id($id, $date)
+	{
+		$this->db->select_sum('jumlah');
+		$result = $this->db
+		->where('id_barang', $id)
+		->where('exp >', $date)
+		->get($this->_table)
+		->row();
+		return $result->jumlah;
+	}
+
+	public function lihat_barang_yang_belum_exp($date)
+	{
+		$query = $this->db
+		->where('exp >', $date)
+		->order_by('exp', 'ASC')
+		->get($this->_table);
+		return $query->result();
+	}
+
+	public function lihat_barang_yang_belum_exp_by_id($date, $id)
+	{
+		$query = $this->db
+			->where('exp >', $date)
+			->where('id_barang', $id)
+			->order_by('exp', 'ASC')
+			->get($this->_table);
+		return $query->result();
+	}
+
+	public function lihat_satu_barang_yang_akan_exp_by_id($date, $id)
+	{
+		$query = $this->db
+		->where('exp >', $date)
+		->where('id_barang', $id)
+		->order_by('exp', 'ASC')
+		->get($this->_table);
+		return $query->row();
+	}
 }

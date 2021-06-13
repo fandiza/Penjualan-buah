@@ -61,11 +61,10 @@
 								<tbody>
 									<?php foreach ($all_barangmasuk as $barangmasuk): ?>
 										<tr>
-                                           
-											<td><?= $barangmasuk->id_barang_masuk ?></td>
+											<td><?= $no++ ?></td>
 											<td><?= $barangmasuk->nama_barang ?></td>
-											<td><?= $barangmasuk->tanggalmasuk ?></td>
-                                            <td><?= $barangmasuk->exp ?></td>
+											<td><?= format_indo($barangmasuk->tanggalmasuk) ?></td>
+                                            <td><?= format_indo($barangmasuk->exp) ?></td>
                                             <td><?= $barangmasuk->jumlah ?></td>
 											<td><?= $barangmasuk->nama_sup ?></td>
                                             <td><?= $barangmasuk->nama ?></td>

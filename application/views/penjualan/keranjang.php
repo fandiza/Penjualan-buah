@@ -15,6 +15,10 @@
 		<?= strtoupper($this->input->post('satuan')) ?>
 		<input type="hidden" name="satuan_hidden[]" value="<?= $this->input->post('satuan') ?>">
 	</td>
+	<td class="diskon">
+		<?= strtoupper($this->input->post('diskon')) ?>
+		<input type="hidden" name="diskon_hidden[]" value="<?= $this->input->post('diskon') ?>">
+	</td>
 	<td class="sub_total">
 		<?= $this->input->post('sub_total') ?>
 		<input type="hidden" name="sub_total_hidden[]" value="<?= $this->input->post('sub_total') ?>">

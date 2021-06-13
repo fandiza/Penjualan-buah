@@ -74,6 +74,7 @@
 											<td><strong>Nama Barang</strong></td>
 											<td><strong>Harga Barang</strong></td>
 											<td><strong>Jumlah</strong></td>
+											<td><strong>Diskon</strong></td>
 											<td><strong>Sub Total</strong></td>
 										</tr>
 									</thead>
@@ -84,13 +85,14 @@
 												<td><?= $detail_penjualan->nama_barang ?></td>
 												<td>Rp <?= number_format($detail_penjualan->harga_barang, 0, ',', '.') ?></td>
 												<td><?= $detail_penjualan->jumlah_barang ?> <?= strtoupper($detail_penjualan->satuan) ?></td>
+												<td><?= $detail_penjualan->diskon ?>%</td>
 												<td>Rp <?= number_format($detail_penjualan->sub_total, 0, ',', '.') ?></td>
 											</tr>
 										<?php endforeach ?>
 									</tbody>
 									<tfoot>
 										<tr>
-											<td colspan="4" align="right"><strong>Total : </strong></td>
+											<td colspan="5" align="right"><strong>Total : </strong></td>
 											<td>Rp <?= number_format($penjualan->total, 0, ',', '.') ?></td>
 										</tr>
 									</tfoot>

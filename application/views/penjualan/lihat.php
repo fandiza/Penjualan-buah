@@ -50,6 +50,7 @@
 										<td>No Penjualan</td>
 										<td>Nama Kasir</td>
 										<td>Tanggal Penjualan</td>
+										<td>Potongan</td>
 										<td>Total</td>
 										<td>Aksi</td>
 									</tr>
@@ -57,10 +58,11 @@
 								<tbody>
 									<?php foreach ($all_penjualan as $penjualan): ?>
 										<tr>
-										
+
 											<td><?= $penjualan->no_penjualan ?></td>
 											<td><?= $penjualan->nama_kasir ?></td>
 											<td><?= format_indo($penjualan->tgl_penjualan) ?> Pukul <?= $penjualan->jam_penjualan ?></td>
+											<td>Rp <?= number_format($penjualan->potongan, 0, ',','.') ?></td>
 											<td>Rp <?= number_format($penjualan->total, 0, ',', '.') ?></td>
 											<td>
 												<a href="<?= base_url('penjualan/detail/' . $penjualan->no_penjualan) ?>" class="btn btn-success btn-sm"><i class="fa fa-eye"></i></a>

@@ -7,8 +7,9 @@ class Penjualan extends CI_Controller {
 		parent::__construct();
 		if($this->session->login['level'] != 'kasir' && $this->session->login['level'] != 'admin') redirect();
 		date_default_timezone_set('Asia/Jakarta');
-		$this->load->helper('Tanggal_Helper');
+		$this->load->helper('tanggal_helper');
 		$this->load->model('M_barang', 'm_barang');
+		$this->load->model('M_barangmasuk', 'm_barangmasuk');
 		$this->load->model('M_penjualan', 'm_penjualan');
 		$this->load->model('M_detail_penjualan', 'm_detail_penjualan');
 		$this->data['aktif'] = 'penjualan';
@@ -36,6 +37,7 @@ class Penjualan extends CI_Controller {
 			'nama_kasir' => $this->input->post('nama_kasir'),
 			'tgl_penjualan' => date('Y-m-d'),
 			'jam_penjualan' => $this->input->post('jam_penjualan'),
+			'potongan' => $this->input->post('potongan'),
 			'total' => $this->input->post('total_hidden'),
 		];
 
@@ -47,6 +49,7 @@ class Penjualan extends CI_Controller {
 			$data_detail_penjualan[$i]['harga_barang'] = $this->input->post('harga_barang_hidden')[$i];
 			$data_detail_penjualan[$i]['jumlah_barang'] = $this->input->post('jumlah_hidden')[$i];
 			$data_detail_penjualan[$i]['satuan'] = $this->input->post('satuan_hidden')[$i];
+			$data_detail_penjualan[$i]['diskon'] = $this->input->post('diskon_hidden')[$i];
 			$data_detail_penjualan[$i]['sub_total'] = $this->input->post('sub_total_hidden')[$i];
 		}
 
@@ -84,6 +87,10 @@ class Penjualan extends CI_Controller {
 
 	public function get_all_barang(){
 		$data = $this->m_barang->lihat_nama_barang($_POST['nama_barang']);
+		$data->barang_masuk = $this->m_barangmasuk->lihat_satu_barang_yang_akan_exp_by_id(date('Y-m-d'), $data->id);
+		if (!empty($data->barang_masuk)) {
+			$data->barang_masuk->sisa_hari = date_diff(date_create($data->barang_masuk->exp), date_create())->d;
+		}
 		echo json_encode($data);
 	}
 

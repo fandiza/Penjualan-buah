@@ -9,13 +9,14 @@ class Barangmasuk extends CI_Controller {
 		$this->load->model('M_barang', 'm_barang');
 		$this->load->model('M_barangmasuk', 'm_barangmasuk');
 		$this->load->model('M_supplier', 'm_supplier');
+		$this->load->helper('Tanggal_Helper');
 		$this->data['aktif'] = 'barangmasuk';
 	}
 
 	public function index(){
 		$this->data['title'] = 'Data Barang Masuk';
 		$this->data['all_barangmasuk'] = $this->m_barangmasuk->lihat();
-
+		$this->data['no'] = 1;
 		$this->load->view('barangmasuk/lihat', $this->data);
 	}
 	public function tambah(){
@@ -49,6 +50,7 @@ class Barangmasuk extends CI_Controller {
 			$id_barang = $this->input->post('id_barang');
 			$jumlah = $this->input->post('jumlah');
 			$stok = $this->m_barang->get_stok_by_id($id_barang);
+			
 			$total = $stok + $jumlah;
 			$this->m_barang->ubah_stok($total, $id_barang);
 			$this->session->set_flashdata('success', 'Data Barang Masuk <strong>Berhasil</strong> Ditambahkan!');
