@@ -23,4 +23,10 @@ class M_penjualan extends CI_Model {
 	public function hapus($no_penjualan){
 		return $this->db->delete($this->_table, ['no_penjualan' => $no_penjualan]);
 	}
+	public function filterbytanggal( $tanggalawal, $tanggalakhir){
+        $query = $this->db->query("SELECT * FROM penjualan
+         WHERE DATE(tgl_penjualan) 
+            BETWEEN '$tanggalawal' AND '$tanggalakhir' ORDER BY tgl_penjualan ASC");
+        return $query->result();
+    }
 }

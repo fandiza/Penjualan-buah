@@ -10,6 +10,7 @@ class Barangmasuk extends CI_Controller {
 		$this->load->model('M_barangmasuk', 'm_barangmasuk');
 		$this->load->model('M_supplier', 'm_supplier');
 		$this->load->helper('Tanggal_Helper');
+		$this->load->library('pdf');
 		$this->data['aktif'] = 'barangmasuk';
 	}
 
@@ -126,5 +127,18 @@ class Barangmasuk extends CI_Controller {
 			redirect('barangmasuk');
 		}
 	}
+	public function filter(){
+        $tanggalawal = $this->input->post('tanggalawal');
+        $tanggalakhir = $this->input->post('tanggalakhir');
 
+			$data['filter_barangmasuk'] = $this->m_barangmasuk->filterbytanggal($tanggalawal,$tanggalakhir);
+            $data['title'] = "Laporan Barang Masuk Filter Berdasarkan Tanggal";
+            $data['subtitle'] = "Dari tanggal : ".$tanggalawal.' Sampai tanggal : '.$tanggalakhir;
+            $this->pdf->set_option('isRemoteEnabled', true);
+            $this->load->library('pdf');
+            $this->pdf->setPaper('A4', 'potrait');
+            $this->pdf->filename = "Laporan Barang Masuk.pdf";
+            $this->pdf->load_view('barangmasuk/barangmasuk_pdf', $data);
+
+	}
 }

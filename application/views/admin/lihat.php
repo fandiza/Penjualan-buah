@@ -21,7 +21,7 @@
 					</div>
 					<div class="float-right">
 						<?php if ($this->session->login['level'] == 'admin'): ?>
-							<a href="<?= base_url('admin/export') ?>" class="btn btn-danger btn-sm"><i class="fa fa-file-pdf"></i>&nbsp;&nbsp;Export</a>
+							
 							<a href="<?= base_url('admin/tambah') ?>" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i>&nbsp;&nbsp;Tambah</a>
 						<?php endif ?>
 					</div>

@@ -20,7 +20,7 @@
 						<h1 class="h3 m-0 text-gray-800"><?= $title ?></h1>
 					</div>
 					<div class="float-right">
-						<a href="<?= base_url('barangmasuk/export') ?>" class="btn btn-danger btn-sm"><i class="fa fa-file-pdf"></i>&nbsp;&nbsp;Export</a>
+						
 						<a href="<?= base_url('barangmasuk/tambah') ?>" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i>&nbsp;&nbsp;Tambah</a>
 					</div>
 				</div>
@@ -83,6 +83,43 @@
 				</div>
 				</div>
 			</div>
+			<br>
+			<div class="content" id="tanggalfilter">
+
+        <div class="row justify-content-center">
+
+            <div class="col-xl-8 col-lg-8">
+                <div class="card card-primary shadow-sm border-bottom-primary">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Form Filter Berdasarkan Tanggal</h6>
+                    </div>
+                    <div class="card-body">
+                        <form action="<?php echo base_url("Barangmasuk/filter"); ?>" method="POST" target='_blank'>
+                            <input type="hidden" name="nilaifilter" value="1">
+                            <input name="valnilai" type="hidden">
+                            <div class="form-group">
+                                <label for="tgl_pemasukan">Tanggal Awal</label>
+                                <input type="date" class="form-control" name="tanggalawal" required="">
+                            </div>
+                            <div class="form-group">
+                                <label for="tgl_pemasukan">Tanggal Akhir</label>
+                                <input type="date" class="form-control" name="tanggalakhir" required="">
+                            </div>
+
+                            <button type="submit" name="submit" class="btn btn-primary"><i
+                                    class="fa fa-print"></i>&nbsp;Cetak</button>
+                            <button type="reset" name="reset" class="btn btn-dark "><i
+                                    class="fas fa-sync-alt"></i>&nbsp;Reset</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- /.row -->
+
+        <!-- /.container-fluid -->
+    </div><br>
 			<!-- load footer -->
 			<?php $this->load->view('partials/footer.php') ?>
 		</div>
@@ -91,5 +128,6 @@
 	<script src="<?= base_url('sb-admin/js/demo/datatables-demo.js') ?>"></script>
 	<script src="<?= base_url('sb-admin') ?>/vendor/datatables/jquery.dataTables.min.js"></script>
 	<script src="<?= base_url('sb-admin') ?>/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+	
 </body>
 </html>

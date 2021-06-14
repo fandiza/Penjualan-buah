@@ -12,6 +12,7 @@ class Penjualan extends CI_Controller {
 		$this->load->model('M_barangmasuk', 'm_barangmasuk');
 		$this->load->model('M_penjualan', 'm_penjualan');
 		$this->load->model('M_detail_penjualan', 'm_detail_penjualan');
+		$this->load->library('pdf');
 		$this->data['aktif'] = 'penjualan';
 	}
 
@@ -112,18 +113,18 @@ class Penjualan extends CI_Controller {
 		$dompdf->stream('Laporan Data Penjualan Tanggal ' . date('d F Y'), array("Attachment" => false));
 	}
 
-	public function export_detail($no_penjualan){
-		$dompdf = new Dompdf();
-		// $this->data['perusahaan'] = $this->m_usaha->lihat();
-		$this->data['penjualan'] = $this->m_penjualan->lihat_no_penjualan($no_penjualan);
-		$this->data['all_detail_penjualan'] = $this->m_detail_penjualan->lihat_no_penjualan($no_penjualan);
-		$this->data['title'] = 'Laporan Detail Penjualan';
-		$this->data['no'] = 1;
+	public function filter(){
+        $tanggalawal = $this->input->post('tanggalawal');
+        $tanggalakhir = $this->input->post('tanggalakhir');
 
-		$dompdf->setPaper('A4', 'Landscape');
-		$html = $this->load->view('penjualan/detail_report', $this->data, true);
-		$dompdf->load_html($html);
-		$dompdf->render();
-		$dompdf->stream('Laporan Detail Penjualan Tanggal ' . date('d F Y'), array("Attachment" => false));
+			$data['filter_penjualan'] = $this->m_penjualan->filterbytanggal($tanggalawal,$tanggalakhir);
+            $data['title'] = "Laporan Penjualan Filter Berdasarkan Tanggal";
+            $data['subtitle'] = "Dari tanggal : ".$tanggalawal.' Sampai tanggal : '.$tanggalakhir;
+            $this->pdf->set_option('isRemoteEnabled', true);
+            $this->load->library('pdf');
+            $this->pdf->setPaper('A4', 'potrait');
+            $this->pdf->filename = "Laporan Penjualan.pdf";
+            $this->pdf->load_view('penjualan/penjualan_pdf', $data);
+
 	}
 }

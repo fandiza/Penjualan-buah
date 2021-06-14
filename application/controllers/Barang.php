@@ -9,6 +9,7 @@ class Barang extends CI_Controller{
 		$this->data['aktif'] = 'barang';
 		$this->load->model('M_barang', 'm_barang');
 		$this->load->model('M_barangmasuk', 'm_barangmasuk');
+		$this->load->library('pdf');
 	}
 
 	public function index(){
@@ -131,17 +132,15 @@ class Barang extends CI_Controller{
 		}
 	}
 
-	public function export(){
-		$dompdf = new Dompdf();
-		// $this->data['perusahaan'] = $this->m_usaha->lihat();
-		$this->data['all_barang'] = $this->m_barang->lihat();
-		$this->data['title'] = 'Laporan Data Barang';
-		$this->data['no'] = 1;
+	public function pdf(){
 
-		$dompdf->setPaper('A4', 'Landscape');
-		$html = $this->load->view('barang/report', $this->data, true);
-		$dompdf->load_html($html);
-		$dompdf->render();
-		$dompdf->stream('Laporan Data Barang Tanggal ' . date('d F Y'), array("Attachment" => false));
+			$data['filter_barang'] = $this->m_barang->lihat();
+            $data['title'] = "Laporan Daftar Barang";
+            $this->pdf->set_option('isRemoteEnabled', true);
+            $this->load->library('pdf');
+            $this->pdf->setPaper('A4', 'potrait');
+            $this->pdf->filename = "Daftar Barang.pdf";
+            $this->pdf->load_view('barang/barang_pdf', $data);
+
 	}
 }
