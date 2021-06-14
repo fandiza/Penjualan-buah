@@ -35,6 +35,18 @@
 					<i class="fas fa-fw fa-user"></i>
 					<span>Kasir</span></a>
 			</li>
+			<li class="nav-item <?= $aktif == 'laporan_harian' ? 'active' : '' ?>">
+				<a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseMaster" aria-expanded="true" aria-controls="collapseMaster">
+					<i class="fas fa-fw fa-user"></i>
+					<span>Laporan Penjualan</span></a>
+					<div id="collapseMaster" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="collapse-inner">
+                        <a class="collapse-item text-light" href="<?= base_url('laporan_harian'); ?>">Laporan Harian</a>
+                        <a class="collapse-item text-light" href="<?= base_url('laporan_bulanan'); ?>">Laporan Bulanan</a>
+                        <a class="collapse-item text-light" href="<?= base_url('Laporan_penghasilan'); ?>">Laporan Transaksi</a>
+                    </div>
+                </div>
+			</li>
 
 			<!-- Divider -->
 			<hr class="sidebar-divider">

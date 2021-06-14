@@ -7,6 +7,7 @@ class Penjualan extends CI_Controller {
 		parent::__construct();
 		if($this->session->login['level'] != 'kasir' && $this->session->login['level'] != 'admin') redirect();
 		date_default_timezone_set('Asia/Jakarta');
+		$this->load->helper('Tanggal_Helper');
 		$this->load->model('M_barang', 'm_barang');
 		$this->load->model('M_penjualan', 'm_penjualan');
 		$this->load->model('M_detail_penjualan', 'm_detail_penjualan');
@@ -33,7 +34,7 @@ class Penjualan extends CI_Controller {
 		$data_penjualan = [
 			'no_penjualan' => $this->input->post('no_penjualan'),
 			'nama_kasir' => $this->input->post('nama_kasir'),
-			'tgl_penjualan' => $this->input->post('tgl_penjualan'),
+			'tgl_penjualan' => date('Y-m-d'),
 			'jam_penjualan' => $this->input->post('jam_penjualan'),
 			'total' => $this->input->post('total_hidden'),
 		];

@@ -30,11 +30,11 @@ class Barang extends CI_Controller{
 	}
 
 	public function proses_tambah(){
+
 		if ($this->session->login['level'] == 'kasir'){
 			$this->session->set_flashdata('error', 'Tambah data hanya untuk admin!');
 			redirect('penjualan');
 		}
-
 		$data = [
 			'id' => $this->input->post('id'),
 			'nama_barang' => $this->input->post('nama_barang'),
