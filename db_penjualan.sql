@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.0.1
+-- version 4.8.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 26 Apr 2021 pada 08.29
--- Versi server: 10.4.6-MariaDB
--- Versi PHP: 7.3.9
+-- Waktu pembuatan: 07 Bulan Mei 2021 pada 19.52
+-- Versi server: 10.1.37-MariaDB
+-- Versi PHP: 7.3.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -34,6 +34,7 @@ CREATE TABLE `barang` (
   `harga_beli` varchar(100) DEFAULT NULL,
   `harga_jual` varchar(100) DEFAULT NULL,
   `stok` float DEFAULT NULL,
+  `stok_utama` float DEFAULT NULL,
   `satuan` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -41,12 +42,12 @@ CREATE TABLE `barang` (
 -- Dumping data untuk tabel `barang`
 --
 
-INSERT INTO `barang` (`id`, `nama_barang`, `harga_beli`, `harga_jual`, `stok`, `satuan`) VALUES
-(14, 'Semangka', '5000', '7000', 97.7, 'kg'),
-(15, 'Melon', '6000', '8000', 80, 'kg'),
-(16, 'Jeruk', '8000', '10000', 66, 'kg'),
-(17, 'Apel', '20000', '27000', 45, 'kg'),
-(18, 'Pear', '15000', '23000', 56, 'kg');
+INSERT INTO `barang` (`id`, `nama_barang`, `harga_beli`, `harga_jual`, `stok`, `stok_utama`, `satuan`) VALUES
+(14, 'Semangka', '5000', '7000', 65.5, 100, 'kg'),
+(15, 'Melon', '6000', '8000', 72, 100, 'kg'),
+(16, 'Jeruk', '8000', '10000', 55, 100, 'kg'),
+(17, 'Apel', '20000', '27000', 45, 100, 'kg'),
+(18, 'Pear', '15000', '23000', 49, 100, 'kg');
 
 -- --------------------------------------------------------
 
@@ -104,6 +105,7 @@ INSERT INTO `data_toko` (`id`, `nama_toko`, `nama_pemilik`, `no_telepon`, `alama
 --
 
 CREATE TABLE `detail_penjualan` (
+  `id_detail` int(11) NOT NULL,
   `no_penjualan` varchar(20) DEFAULT NULL,
   `nama_barang` varchar(100) DEFAULT NULL,
   `harga_barang` varchar(20) DEFAULT NULL,
@@ -116,14 +118,22 @@ CREATE TABLE `detail_penjualan` (
 -- Dumping data untuk tabel `detail_penjualan`
 --
 
-INSERT INTO `detail_penjualan` (`no_penjualan`, `nama_barang`, `harga_barang`, `jumlah_barang`, `satuan`, `sub_total`) VALUES
-('130120260421', 'Semangka', '7000', 2, 'kg', '14000'),
-('130120260421', 'Jeruk', '10000', 1, 'kg', '10000'),
-('130142260421', 'Jeruk', '10000', 3, 'kg', '30000'),
-('130142260421', 'Apel', '27000', 5, 'kg', '135000'),
-('130142260421', 'Pear', '23000', 4, 'kg', '92000'),
-('131633260421', 'Semangka', '7000', 10.4, 'kg', '72800'),
-('131747260421', 'Semangka', '7000', 2.3, 'kg', '16099.999999999998');
+INSERT INTO `detail_penjualan` (`id_detail`, `no_penjualan`, `nama_barang`, `harga_barang`, `jumlah_barang`, `satuan`, `sub_total`) VALUES
+(3, '130142260421', 'Jeruk', '10000', 3, 'kg', '30000'),
+(4, '130142260421', 'Apel', '27000', 5, 'kg', '135000'),
+(5, '130142260421', 'Pear', '23000', 4, 'kg', '92000'),
+(14, '011444020521', 'Pear', '23000', 1, 'kg', '23000'),
+(15, '012024020521', 'Melon', '8000', 1, 'kg', '8000'),
+(16, '041903020521', 'Melon', '8000', 1, 'kg', '8000'),
+(17, '042023020521', 'Semangka', '7000', 10, 'kg', '70000'),
+(18, '214521030521', 'Semangka', '7000', 10, 'kg', '70000'),
+(19, '213921070521', 'Melon', '8000', 5, 'kg', '40000'),
+(20, '213921070521', 'Pear', '23000', 6, 'kg', '138000'),
+(21, '213921070521', 'Semangka', '7000', 5, 'kg', '35000'),
+(22, '221132070521', 'Semangka', '7000', 0.7, 'kg', '4900'),
+(23, '221159070521', 'Semangka', '7000', 1.5, 'kg', '10500'),
+(24, '221252070521', 'Semangka', '7000', 1.3, 'kg', '9100'),
+(25, '221336070521', 'Semangka', '7000', 0.7, 'kg', '4900');
 
 -- --------------------------------------------------------
 
@@ -135,7 +145,7 @@ CREATE TABLE `penjualan` (
   `id` int(11) NOT NULL,
   `no_penjualan` varchar(20) DEFAULT NULL,
   `nama_kasir` varchar(100) DEFAULT NULL,
-  `tgl_penjualan` varchar(20) DEFAULT NULL,
+  `tgl_penjualan` date NOT NULL,
   `jam_penjualan` varchar(20) DEFAULT NULL,
   `total` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -145,10 +155,16 @@ CREATE TABLE `penjualan` (
 --
 
 INSERT INTO `penjualan` (`id`, `no_penjualan`, `nama_kasir`, `tgl_penjualan`, `jam_penjualan`, `total`) VALUES
-(19, '130120260421', 'fandizaq', '26/04/2021', '13:01:20', 24000),
-(20, '130142260421', 'fandizaq', '26/04/2021', '13:01:42', 257000),
-(21, '131633260421', 'fandizaq', '26/04/2021', '13:16:33', 72800),
-(22, '131747260421', 'fandizaq', '26/04/2021', '13:17:47', 16099);
+(28, '011444020521', 'fandizaq', '2021-05-02', '01:14:44', 23000),
+(29, '012024020521', 'fandizaq', '2021-05-02', '01:20:24', 8000),
+(30, '041903020521', 'fandizaq', '2021-05-02', '04:19:03', 8000),
+(31, '042023020521', 'fandizaq', '2021-05-02', '04:20:23', 70000),
+(32, '214521030521', 'fandizaq', '2021-05-03', '21:45:21', 70000),
+(33, '213921070521', 'fandizaq', '2021-05-07', '21:39:21', 213000),
+(34, '221132070521', 'fandizaq', '2021-05-07', '22:11:32', 4900),
+(35, '221159070521', 'fandizaq', '2021-05-07', '22:11:59', 10500),
+(36, '221252070521', 'fandizaq', '2021-05-07', '22:12:52', 9100),
+(37, '221336070521', 'fandizaq', '2021-05-07', '22:13:36', 4900);
 
 -- --------------------------------------------------------
 
@@ -185,7 +201,7 @@ CREATE TABLE `user` (
   `username` varchar(50) NOT NULL,
   `password` varchar(50) NOT NULL,
   `level` enum('admin','kasir') NOT NULL,
-  `last_login` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `last_login` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -193,8 +209,8 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id_user`, `nama`, `username`, `password`, `level`, `last_login`) VALUES
-(14, 'fandizaq', 'fandi', '81dc9bdb52d04dc20036dbd8313ed055', 'admin', '2021-04-25 16:26:57'),
-(15, 'winandri', 'winandri', '1234', 'kasir', '2021-04-24 17:07:08'),
+(14, 'fandizaq', 'fandi', '81dc9bdb52d04dc20036dbd8313ed055', 'admin', '2021-04-26 15:33:47'),
+(15, 'winandri', 'winandri', '81dc9bdb52d04dc20036dbd8313ed055', 'kasir', '2021-04-26 15:37:23'),
 (16, 'graha', 'graha', '81dc9bdb52d04dc20036dbd8313ed055', 'admin', '2021-04-25 18:29:23');
 
 --
@@ -226,6 +242,7 @@ ALTER TABLE `data_toko`
 -- Indeks untuk tabel `detail_penjualan`
 --
 ALTER TABLE `detail_penjualan`
+  ADD PRIMARY KEY (`id_detail`),
   ADD KEY `no_penjualan` (`no_penjualan`);
 
 --
@@ -254,7 +271,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT untuk tabel `barang`
 --
 ALTER TABLE `barang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT untuk tabel `barang_masuk`
@@ -269,10 +286,16 @@ ALTER TABLE `data_toko`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT untuk tabel `detail_penjualan`
+--
+ALTER TABLE `detail_penjualan`
+  MODIFY `id_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+
+--
 -- AUTO_INCREMENT untuk tabel `penjualan`
 --
 ALTER TABLE `penjualan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT untuk tabel `supplier`
