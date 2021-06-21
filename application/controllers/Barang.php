@@ -67,7 +67,6 @@ class Barang extends CI_Controller{
 			'harga_beli' => $this->input->post('harga_beli'),
 			'harga_jual' => $this->input->post('harga_jual'),
 			'stok' => $this->input->post('stok'),
-			'stok' => $this->input->post('stok_awal'),
 			'satuan' => $this->input->post('satuan'),
 		];
 
@@ -104,7 +103,6 @@ class Barang extends CI_Controller{
 			'harga_beli' => $this->input->post('harga_beli'),
 			'harga_jual' => $this->input->post('harga_jual'),
 			'stok' => $this->input->post('stok'),
-			'stok' => $this->input->post('stok_awal'),
 			'satuan' => $this->input->post('satuan'),
 		];
 
@@ -131,7 +129,43 @@ class Barang extends CI_Controller{
 			redirect('barang');
 		}
 	}
+	
+	public function barang_rusak(){
+		$this->data['title'] = 'Tambah Barang Rusak';
+		$this->data['all_barang'] = $this->m_barang->lihat();
+		$this->load->view('barang/barang_rusak', $this->data);
+	}
 
+	public function proses_barang_rusak(){
+		if ($this->session->login['level'] == 'kasir'){
+			$this->session->set_flashdata('error', 'Tambah data hanya untuk admin!');
+			redirect('penjualan');
+		}
+
+		$data = [
+			'id' => $this->input->post('id'),
+			'nama_barang' => $this->input->post('nama_barang'),
+			'harga_beli' => $this->input->post('harga_beli'),
+			'harga_jual' => $this->input->post('harga_jual'),
+			'stok' => $this->input->post('stok'),
+			'stok_rusak' => $this->input->post('stok_rusak'),
+			'satuan' => $this->input->post('satuan'),
+		];
+
+		if($this->m_barang->ubah($data,$id)){
+			$id = $this->input->post('id');
+			$jumlah = $this->input->post('stok_rusak');
+			$stok = $this->m_barang->get_stok_by_id($id);
+			
+			$total = $stok - $jumlah;
+			$this->m_barang->ubah_stok($total, $jumlah, $id);
+			$this->session->set_flashdata('success', 'Data Barang Rusak <strong>Berhasil</strong> Ditambahkan!');
+			redirect('barang');
+		} else {
+			$this->session->set_flashdata('error', 'Data Barang Rusak <strong>Gagal</strong> Ditambahkan!');
+			redirect('barang');
+		}
+	}
 	public function pdf(){
 
 			$data['filter_barang'] = $this->m_barang->lihat();

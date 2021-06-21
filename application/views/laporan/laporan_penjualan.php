@@ -17,21 +17,39 @@
 				<div class="container-fluid">
 				<div class="clearfix">
 					<div class="float-left">
-						<h1 class="h3 m-0 text-gray-800"><?= $title ?></h1>
+						<h1 class="h3 m-0 text-gray-800">Laporan Penghasilan Tahunan</h1>
 					</div>
 				</div>
 				<hr>
-				<div class="form-group col-5">
-				<label for="nama_barang">Nama Barang</label>
-				<select name="nama_barang" id="nama_barang" class="form-control" onchange="fetchdata(this.value);">
+				<div class="row">
+					<div class="form-group col-5">
+					<label for="nama_barang">Nama Barang</label>
+					<select name="nama_barang" id="nama_barang" class="form-control" onchange="fetchdata(this.value);">
 
-				<option value="">Total Pendapatan Keseluruhan</option>
-				<?php foreach ($all_barang as $barang): ?>
-				<option value="<?= $barang['id']?>"><?= $barang['nama_barang'] ?></option>
-				<?php endforeach ?>
+					<option value="">Total Pendapatan Keseluruhan</option>
+					<?php foreach ($all_barang as $barang): ?>
+					<option value="<?= $barang['id']?>"><?= $barang['nama_barang'] ?></option>
+					<?php endforeach ?>
 
-				</select>
+					</select>
+					</div>
+
+					<div class="form-group col-3">
+						<label>Filter Tahun</label>
+						<div class="row">
+						<div class="col-1 my-auto">
+							<a id="btnDecrement"><i class="fas fa-caret-left"></i></a>
+						</div>
+						<div class="col-5">
+							<input type="text" id="year" class="form-control" value="<?= date("Y"); ?>" disabled>
+						</div>
+						<div class="col-1 my-auto">
+							<a id="btnIncrement"><i class="fas fa-caret-right"></i></a>
+						</div>
+						</div>
+					</div>
 				</div>
+
 				<div class="row">
 				<div class="col-xl-3 col-md-6 mb-4">
 		              <div class="card border-left-warning shadow h-100 py-2">
@@ -103,7 +121,6 @@
 		                </div>
 		              </div>
 		            </div>
-
 		            <!-- Earnings (Monthly) Card Example -->
 		            
 
@@ -112,6 +129,7 @@
 		        	</div>
 				</div>
 			</div>
+			
 			<!-- load footer -->
 			<?php $this->load->view('partials/footer.php') ?>
 		</div>
@@ -123,16 +141,17 @@
 
 	<script>
 		function fetchdata(x){
+			var year = document.getElementById("year").value;
 			const xmlHttp = new XMLHttpRequest();
 			if(x.length == 0 && x == ""){
-				xmlHttp.open("GET","<?= base_url('Laporan_Penghasilan/getAll') ?>", true );
+				xmlHttp.open("GET","<?= base_url('Laporan_Penghasilan/getAll') ?>" , true );
 				xmlHttp.onload = function(){
 					if(this.status = 200){
 						const result = JSON.parse(xmlHttp.response);
-						document.getElementById("laba_kotor").innerHTML = "Rp " + number_format(result['laba_kotor'],0,',','.');
-						document.getElementById("laba_bersih").innerHTML = "Rp " + number_format(result['laba_bersih'],0,',','.');
+						document.getElementById("laba_kotor").innerHTML = "Rp. " + result['laba_kotor'];
+						document.getElementById("laba_bersih").innerHTML = "Rp. " + result['laba_bersih'];
 						document.getElementById("total_penjualan").innerHTML = result['barang_terjual'];
-						document.getElementById("stok").innerHTML = "Rp " + number_format(result['modal'],0,',','.');
+						document.getElementById("stok").innerHTML = "Rp. " + result['modal'];
 					}
 				}
 				xmlHttp.send();
@@ -150,6 +169,52 @@
 				}
 				xmlHttp.send();
 			}
+		}
+
+		$("#btnDecrement").on('click', function() {
+			var x = document.getElementById("year").value = decrement();
+			const xmlHttp = new XMLHttpRequest();
+			xmlHttp.open("GET","<?= base_url('Laporan_Penghasilan/getDataByYear/') ?>" + x , true );
+				xmlHttp.onload = function(){
+					if(this.status = 200){
+						const result = JSON.parse(xmlHttp.response);
+						console.log(result);
+						document.getElementById("laba_kotor").innerHTML = "Rp. " + result['laba_kotor'];
+						document.getElementById("laba_bersih").innerHTML = "Rp. " + result['laba_bersih'];
+						document.getElementById("total_penjualan").innerHTML = result['barang_terjual'];
+						document.getElementById("stok").innerHTML = "Rp. " + result['modal'];
+					}
+				}
+				xmlHttp.send();
+		});
+
+		$("#btnIncrement").on('click', function() {
+			var x = document.getElementById("year").value = increment();
+			const xmlHttp = new XMLHttpRequest();
+			xmlHttp.open("GET","<?= base_url('Laporan_Penghasilan/getDataByYear/') ?>" + x , true );
+				xmlHttp.onload = function(){
+					if(this.status = 200){
+						const result = JSON.parse(xmlHttp.response);
+						console.log(result);
+						document.getElementById("laba_kotor").innerHTML = "Rp. " + result['laba_kotor'];
+						document.getElementById("laba_bersih").innerHTML = "Rp. " + result['laba_bersih'];
+						document.getElementById("total_penjualan").innerHTML = result['barang_terjual'];
+						document.getElementById("stok").innerHTML = "Rp. " + result['modal'];
+					}
+				}
+				xmlHttp.send();
+		})
+
+		function decrement() {
+			let value = parseInt(document.getElementById("year").value);
+			value -= 1;
+			return value
+		}
+
+		function increment() {
+			let value = parseInt(document.getElementById("year").value);
+			value += 1;
+			return value;
 		}
 	</script>
 </body>

@@ -15,12 +15,16 @@
 				<?php $this->load->view('partials/topbar.php') ?>
 
 				<div class="container-fluid">
-				<div class="clearfix">
-					<div class="float-left">
-						<h1 class="h3 m-0 text-gray-800"><?= $title ?></h1>
+					<div class="clearfix">
+						<div class="float-left">
+							<h1 class="h3 m-0 text-gray-800"><?= $title ?></h1>
+					</div>
+					
+					<div class="float-right col-md-2">
+						<a href="<?= base_url('barang') ?>" class="btn btn-secondary btn-sm"><i class="fa fa-reply"></i>&nbsp;&nbsp;Kembali</a>
 					</div>
 					<div class="float-right">
-						<a href="<?= base_url('barang') ?>" class="btn btn-secondary btn-sm"><i class="fa fa-reply"></i>&nbsp;&nbsp;Kembali</a>
+						<a href="<?= base_url('barangmasuk/tambah') ?>" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i>&nbsp;&nbsp;Tambah Stok</a>
 					</div>
 				</div>
 				<hr>

@@ -25,23 +25,26 @@
 				</div>
 				<hr>
 				<div class="row">
-					<div class="col-md-6">
+					<div class="col-md-8 ">
 						<div class="card shadow">
 							<div class="card-header"><strong>Isi Form Dibawah Ini!</strong></div>
 							<div class="card-body">
 								<form action="<?= base_url('barangmasuk/proses_tambah') ?>" id="form-tambah" method="POST">
-								<div class="form-row">
+									<div class="form-row">
 										<div class="form-group col-md-4">
 											<label for="nama_barang"><strong>Nama Barang</strong></label>
 											</div>
-											<div class="form-group col-md-8">
+											<div class="form-group col-md-5">
                                             <select name="id_barang" id="" class="form-control" required>
 											<option value="">Pilih Barang</option>
 												<?php foreach ($all_barang as $barang): ?>
 													<option value="<?= $barang->id ?>"><?= $barang->nama_barang ?></option>
 												<?php endforeach ?>
                                             </select>
-										</div>
+											</div>
+											<div class="form-group col-md-3">
+											<a href="<?= base_url('barang/tambah') ?>" class="btn btn-success btn-sm"><i class="fas fa-plus"></i>&nbsp;&nbsp;Tambah Barang</a>
+											</div>
 									</div>
         
 									<div class="form-row">
@@ -61,22 +64,28 @@
 									<div class="form-row">
 										<div class="form-group col-md-4">
 											<label for="stok"><strong>Jumlah</strong></label>
-											</div>
-											<div class="form-group col-md-8">
+										</div>
+										<div class="form-group col-md-8">
 											<input type="number" name="jumlah" placeholder="Masukkan Jumlah" autocomplete="off"  class="form-control" step="0.00001"  required>
 										</div>
-                                        </div>
-                                        <div class="form-row">
+                                    </div>
+                                    <div class="form-row">
 										<div class="form-group col-md-4">
 											<label for="stok"><strong>Supplier</strong></label>
-											</div>
-											<div class="form-group col-md-8">
+										</div>
+										
+										<div class="form-group col-md-5">
 											<select name="id_supplier" id="" class="form-control" required>
                                             <?php foreach ($all_supplier as $supplier): ?>
-													<option value="<?= $supplier->id_supplier ?>"><?= $supplier->nama_sup ?></option>
-												<?php endforeach ?>
+												<option value="<?= $supplier->id_supplier ?>"><?= $supplier->nama_sup ?></option>
+											<?php endforeach ?>
+											</select>
 										</div>
-                                        </div>
+										<div class="form-group col-md-3">
+											<a href="<?= base_url('supplier/tambah') ?>" class="btn btn-success btn-sm"><i class="fas fa-plus"></i>&nbsp;&nbsp;Tambah Supplier</a>
+										</div>
+										
+                                    </div>
                                       </div>
 									</div>
                                     <input type="hidden" name="id_user" value="<?= $this->session->login['id_user'] ?>">

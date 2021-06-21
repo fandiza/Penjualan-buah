@@ -64,9 +64,16 @@ class M_barang extends CI_Model{
 		return $query;
 	}
 
-	public function ubah_stok($stok, $id){
+	public function ubah_stok_barang($stok, $id){
+		$query = $this->db->set('stok', $stok);		
+		$query = $this->db->where(['id' => $id]);
+		$query = $this->db->update($this->_table);
+		return $query;
+	}
+
+	public function ubah_stok($stok,$jumlah, $id){
 		$query = $this->db->set('stok', $stok);
-		$query = $this->db->set('stok_utama', $stok);		
+		$query = $this->db->set('stok_rusak', $jumlah);		
 		$query = $this->db->where(['id' => $id]);
 		$query = $this->db->update($this->_table);
 		return $query;

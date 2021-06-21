@@ -52,6 +52,30 @@
 												<input type="text" name="jam_penjualan" value="<?= date('H:i:s') ?>" readonly class="form-control">
 											</div>
 										</div>
+										<div class="form-row">
+										
+										<div class="form-group col-3">
+											<label>Atur Potongan</label>
+												<div class="input-group col-12">
+													<input type="number" class="form-control" id="potongankg" value="20" disabled>
+													<div class="input-group-append">
+														<div class="input-group-text">Kg</div>
+													</div>
+												</div>
+										</div>
+										<div class="form-group col-3">
+											<label>Atur Potongan</label>
+												<div class="input-group col-12">
+													<input type="number" class="form-control" id="potonganpersen" value="5" disabled>
+													<div class="input-group-append">
+														<div class="input-group-text">%</div>
+													</div>
+												</div>
+										</div>
+
+										</div>
+										
+									
 										<h5>Data Barang</h5>
 										<hr>
 										<div class="form-row">
@@ -74,7 +98,7 @@
 												<input type="number" name="jumlah" value="" class="form-control" readonly min='1'>
 											</div>
 											<div class="form-group col-2">
-												<label>Diskon <span id="ket_diskon"></span></label>
+												<label>Diskon Kadaluarsa<span id="ket_diskon"></span></label>
 												<input type="text" name="diskon" value="" class="form-control" readonly min='0'>
 											</div>
 											<div class="form-group col-2">
@@ -97,7 +121,7 @@
 														<td width="15%">Harga</td>
 														<td width="15%">Jumlah</td>
 														<td width="10%">Satuan</td>
-														<td width="10%">Diskon</td>
+														<td width="10%">Diskon Kadaluarsa</td>
 														<td width="10%">Sub Total</td>
 														<td width="10%">Aksi</td>
 													</tr>
@@ -119,7 +143,7 @@
 														<td rowspan = "3">
 															<input type="hidden" name="total_hidden" value="">
 															<input type="hidden" name="max_hidden" value="">
-															<button type="submit" class="btn btn-primary"><i class="fa fa-save"></i>&nbsp;&nbsp;Simpan</button>
+															<button disabled id="simpan_total" type="submit" class="btn btn-primary"><i class="fa fa-save"></i>&nbsp;&nbsp;Simpan</button>
 														</td>
 													</tr>
 													<tr>
@@ -149,6 +173,8 @@
 	<?php $this->load->view('partials/js.php') ?>
 	<script>
 		$(document).ready(function() {
+			$('input[id="potongankg"]').prop('disabled', false);
+			$('input[id="potonganpersen"]').prop('disabled', false);
 			// $('tfoot').hide()
 
 			// $(document).keypress(function(event) {
@@ -210,6 +236,7 @@
 					sub_total: $('input[name="sub_total"]').val(),
 				}
 				jumlahTemp += parseInt(data_keranjang.jumlah)
+				$('button#simpan_total').prop('disabled', false)
 
 				if (parseInt($('input[name="max_hidden"]').val()) <= parseInt(data_keranjang.jumlah)) {
 					alert('stok tidak tersedia! stok tersedia : ' + parseInt($('input[name="max_hidden"]').val()))
@@ -233,7 +260,8 @@
 						}
 					})
 				}
-
+				$('input[id="potongankg"]').prop('disabled', true);
+				$('input[id="potonganpersen"]').prop('disabled', true);
 			})
 
 
@@ -242,7 +270,19 @@
 
 				$('option[value="' + $(this).data('nama-barang') + '"]').show()
 
-				if ($('tbody').children().length == 0) $('tfoot').hide()
+				if ($('tbody').children().length == 0){
+					$('input[id="potongankg"]').prop('disabled', false);
+					$('input[id="potonganpersen"]').prop('disabled', false);
+				}
+				$('#total').html(hitung_total())
+				$('#potongan').html(potongan())
+				$('#total_bayar').html(total_bayar())
+				if (total_bayar() != 0 && hitung_total() != 0) {
+					$('button#simpan_total').prop('disabled', false)
+				} else {
+					$('button#simpan_total').prop('disabled', true)
+
+				}
 			})
 
 			$('button[type="submit"]').on('click', function() {
@@ -252,6 +292,8 @@
 				$('input[name="jumlah"]').prop('disabled', true)
 				$('input[name="diskon"]').prop('disabled', true)
 				$('input[name="sub_total"]').prop('disabled', true)
+				$('input[id="potongankg"]').prop('disabled', false);
+				$('input[id="potonganpersen"]').prop('disabled', false);
 			})
 
 			function hitung_total() {
@@ -262,10 +304,24 @@
 
 				return total;
 			}
+
+			function potonganPersen() {
+				const potonganpersen = document.getElementById("potonganpersen").value;
+				$('#potonganpersen').on('keydown keyup', function() {
+					potonganpersen = document.getElementById("potonganpersen").value;
+				})
+				return potonganpersen;
+			}
+
 			function potongan(){
 				let potongan = 0;
-				if(jumlahTemp > 20){
-					potongan = hitung_total() * (5/100)
+				var potonganKg = document.getElementById("potongankg").value;
+				$('#potongankg').on('keydown keyup', function() {
+					potonganKg = document.getElementById("potongankg").value;
+				})
+				if(jumlahTemp > potonganKg) {
+					potongan = hitung_total() * (parseInt(potonganPersen())/100)
+					
 				}else{
 					potongan = 0;
 				}

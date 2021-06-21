@@ -47,7 +47,6 @@
 							<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 								<thead>
 									<tr>
-									
                                         <td>No </td>
 										<td>Barang</td>
 										<td>Tanggal Masuk</td>

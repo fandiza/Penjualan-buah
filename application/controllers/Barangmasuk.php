@@ -53,7 +53,7 @@ class Barangmasuk extends CI_Controller {
 			$stok = $this->m_barang->get_stok_by_id($id_barang);
 			
 			$total = $stok + $jumlah;
-			$this->m_barang->ubah_stok($total, $id_barang);
+			$this->m_barang->ubah_stok_barang($total, $id_barang);
 			$this->session->set_flashdata('success', 'Data Barang Masuk <strong>Berhasil</strong> Ditambahkan!');
 			redirect('barangmasuk');
 		} else {
@@ -97,7 +97,7 @@ class Barangmasuk extends CI_Controller {
 			$stok = $this->m_barang->get_stok_by_id($id_barang);
 			$selisih = $jumlah_baru - $jumlah_lama;
 			$total = $stok + $selisih;
-			$this->m_barang->ubah_stok($total, $id_barang);
+			$this->m_barang->ubah_stok_barang($total, $id_barang);
 			$this->session->set_flashdata('success', 'Data Barang <strong>Berhasil</strong> Diubah!');
 			redirect('barangmasuk');
 		} else {

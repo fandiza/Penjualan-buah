@@ -17,4 +17,26 @@ class Laporan_harian extends CI_Controller {
 		$this->data['chart'] = $this->m_laporanharian->getIncomeBasedDay();
 		$this->load->view('laporan/laporan_harian', $this->data);
 	}
+	public function filter(){
+		$tanggalawal = $this->input->post('tanggalawal');
+        $tanggalakhir = $this->input->post('tanggalakhir');
+
+			$data['filter_barangmasuk'] = $this->m_barangmasuk->filterbytanggal($tanggalawal,$tanggalakhir);
+            $data['title'] = "Laporan Barang Masuk Filter Berdasarkan Tanggal";
+            $data['subtitle'] = "Dari tanggal : ".$tanggalawal.' Sampai tanggal : '.$tanggalakhir;
+            $this->pdf->set_option('isRemoteEnabled', true);
+            $this->load->library('pdf');
+            $this->pdf->setPaper('A4', 'potrait');
+            $this->pdf->filename = "Laporan Barang Masuk.pdf";
+            $this->pdf->load_view('barangmasuk/barangmasuk_pdf', $data);
+	}
+	public function filterByDay($start, $end){
+		$getDay = $this->m_laporanharian->filterByDate($start , $end);
+		echo json_encode($getDay);
+	}
+
+	public function getDataByDay($start, $end){
+		$getData = $this->m_laporanharian->getDataByDate($start, $end);
+		echo json_encode($getData);
+	}
 }

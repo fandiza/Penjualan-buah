@@ -140,8 +140,8 @@ class M_barangmasuk extends CI_Model {
         $query = $this->db->query("SELECT * FROM barang_masuk INNER JOIN supplier ON barang_masuk.id_supplier = supplier.id_supplier
 		INNER JOIN barang ON barang_masuk.id_barang = barang.id
 		INNER JOIN user ON barang_masuk.id_user = user.id_user
-         WHERE DATE(tanggalmasuk) 
-            BETWEEN '$tanggalawal' AND '$tanggalakhir' ORDER BY tanggalmasuk ASC");
+        WHERE DATE(tanggalmasuk)
+        BETWEEN '$tanggalawal' AND '$tanggalakhir' ORDER BY tanggalmasuk ASC");
         return $query->result();
     }
 }

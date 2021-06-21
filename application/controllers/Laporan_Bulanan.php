@@ -17,4 +17,13 @@ class Laporan_Bulanan extends CI_Controller {
 		$this->data['chart'] = $this->m_laporanbulanan->getIncomeBasedMonth();
 		$this->load->view('laporan/laporan_bulanan', $this->data);
 	}
+	
+	public function filterByMonth($start, $end){
+		$getData = $this->m_laporanbulanan->filterByMonth($start, $end);
+		echo json_encode($getData);
+	}
+	public function getDataByMonth($start, $end){
+		$getData = $this->m_laporanbulanan->getDataByMonth($start, $end);
+		echo json_encode($getData);
+	}
 }

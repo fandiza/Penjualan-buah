@@ -23,7 +23,8 @@
 						<div class="float-right">
 							<?php if ($this->session->login['level'] == 'admin') : ?>
 								<a href="<?= base_url('barang/pdf') ?>" class="btn btn-danger btn-sm"><i class="fa fa-file-pdf"></i>&nbsp;&nbsp;Export</a>
-								<a href="<?= base_url('barang/tambah') ?>" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i>&nbsp;&nbsp;Tambah</a>
+								<a href="<?= base_url('barang/tambah') ?>" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i>&nbsp;&nbsp;Tambah Baru</a>
+								<a href="<?= base_url('barang/barang_rusak') ?>" class="btn btn-warning btn-sm"><i class="fa fa-plus"></i>&nbsp;&nbsp;Barang Rusak</a>
 							<?php endif ?>
 						</div>
 					</div>
@@ -55,8 +56,7 @@
 											<td>Harga Beli</td>
 											<td>Harga Jual</td>
 											<td>Stok Tersisa</td>
-											<td>Stok Awal</td>
-											<!-- <td>Status</td> -->
+											<td>Stok Rusak</td>
 											<?php if ($this->session->login['level'] == 'admin') : ?>
 												<td>Aksi</td>
 											<?php endif ?>
@@ -70,7 +70,7 @@
 												<td>Rp <?= number_format($barang->harga_beli, 0, ',', '.') ?></td>
 												<td>Rp <?= number_format($barang->harga_jual, 0, ',', '.') ?></td>
 												<td><?= $barang->stok ?> <?= strtoupper($barang->satuan) ?></td>
-												<td><?= $barang->stok_utama ?> <?= strtoupper($barang->satuan) ?></td>
+												<td><?= $barang->stok_rusak ?> <?= strtoupper($barang->satuan) ?></td>
 												<!-- <td>
 													<?php foreach ($barang->barang_masuk as $item_barang_masuk) : ?>
 														<button type="button" class="btn btn-primary btn-sm mb-1 d-block w-100">
