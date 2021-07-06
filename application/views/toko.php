@@ -58,6 +58,10 @@
 										<input type="number" name="no_telepon" id="no_telepon" value="<?= $toko->no_telepon ?>" placeholder="Masukan No Telepon" class="form-control" readonly>
 									</div>
 									<div class="form-group">
+										<label for="nama_toko"><strong>Email : </strong></label>
+										<input type="text" name="email" id="email" value="<?= $toko->email ?>" placeholder="Masukan email" class="form-control" readonly>
+									</div>
+									<div class="form-group">
 										<label for="alamat"><strong>Alamat</strong></label>
 										<textarea readonly name="alamat" id="alamat" class="form-control" placeholder="Masukan Alamat" style="resize: none;"><?= $toko->alamat ?></textarea>
 									</div>
@@ -86,6 +90,7 @@
 				$('#nama_pemilik').prop('readonly', false)
 				$('#no_telepon').prop('readonly', false)
 				$('#alamat').prop('readonly', false)
+				$('#email').prop('readonly', false)
 			})
 
 			$('button[type="reset"]').on('click', function(){
@@ -93,6 +98,7 @@
 				$('#nama_pemilik').prop('readonly', true)
 				$('#no_telepon').prop('readonly', true)
 				$('#alamat').prop('readonly', true)
+				$('#email').prop('readonly', true)
 			})
 		})
 	</script>

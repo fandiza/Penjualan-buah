@@ -1,12 +1,6 @@
 <!DOCTYPE html>
 <html>
 
-
-<!-- <head>
-    <title></title>
-    <h6 style="font-size:3rem;text-align:center;margin:0;padding:0">Baiti Jannati</h6><br>
-    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-</head> -->
 <style type="text/css">
 .kop-surat {
     line-height: 50%;
@@ -14,8 +8,6 @@
 
 table {
     margin: auto;
-
-
 }
 </style>
 
@@ -60,7 +52,7 @@ table {
                     <th class="text-primary" style=" text-align: center; ">Harga Beli</th>
                     <th class="text-primary" style=" text-align: center; ">Harga Jual</th>
                     <th class="text-primary" style=" text-align: center; ">Stok Tersisa</th>
-                    <th class="text-primary" style=" text-align: center; ">Stok Awal</th>
+                    <th class="text-primary" style=" text-align: center; ">Stok Rusak</th>
                     
                   
                 </tr>
@@ -74,7 +66,7 @@ table {
                     <td style=" text-align: center;"><?= $fb->harga_beli ?></td>
                     <td style=" text-align: center;"><?= $fb->harga_jual ?></td>
                     <td style=" text-align: center;"><?= $fb->stok ?> <?= $fb->satuan ?></td>
-                    <td style=" text-align: center;"><?= $fb->stok_utama ?> <?= $fb->satuan ?></td>
+                    <td style=" text-align: center;"><?= $fb->stok_rusak ?> <?= $fb->satuan ?></td>
                 </tr>
 
                 <?php endforeach ?>

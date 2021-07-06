@@ -107,7 +107,7 @@ class Pengguna extends CI_Controller {
 
 	public function export(){
 		$dompdf = new Dompdf();
-		// $this->data['perusahaan'] = $this->m_usaha->lihat();
+		
 		$this->data['all_pengguna'] = $this->m_pengguna->lihat();
 		$this->data['title'] = 'Laporan Data Pengguna';
 		$this->data['no'] = 1;

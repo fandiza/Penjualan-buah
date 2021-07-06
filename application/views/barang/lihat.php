@@ -71,21 +71,11 @@
 												<td>Rp <?= number_format($barang->harga_jual, 0, ',', '.') ?></td>
 												<td><?= $barang->stok ?> <?= strtoupper($barang->satuan) ?></td>
 												<td><?= $barang->stok_rusak ?> <?= strtoupper($barang->satuan) ?></td>
-												<!-- <td>
-													<?php foreach ($barang->barang_masuk as $item_barang_masuk) : ?>
-														<button type="button" class="btn btn-primary btn-sm mb-1 d-block w-100">
-															<?= $item_barang_masuk->jumlah ?>
-															<?= date_diff(date_create($item_barang_masuk->exp), date_create())->d ?>
-															<span class="badge"> 3 </span>
-														</button>
-													<?php endforeach; ?>
-												</td> -->
 												<td>
 													<?php if ($this->session->login['level'] == 'admin') : ?>
 														<a href="<?= base_url('barang/ubah/' . $barang->id) ?>" class="btn btn-success btn-sm"><i class="fa fa-pen"></i></a>
 														<a onclick="return confirm('apakah anda yakin?')" href="<?= base_url('barang/hapus/' . $barang->id) ?>" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
 													<?php endif ?>
-													<a href="#" class="btn btn-secondary btn-sm"><i class="fa fa-eye"></i></a>
 												</td>
 											</tr>
 										<?php endforeach ?>

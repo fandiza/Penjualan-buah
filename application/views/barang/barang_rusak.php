@@ -6,12 +6,12 @@
 
 <body id="page-top">
 	<div id="wrapper">
-		<!-- load sidebar -->
+		
 		<?php $this->load->view('partials/sidebar.php') ?>
 
 		<div id="content-wrapper" class="d-flex flex-column">
 			<div id="content" data-url="<?= base_url('barang') ?>">
-				<!-- load Topbar -->
+				
 				<?php $this->load->view('partials/topbar.php') ?>
 
 				<div class="container-fluid">
@@ -35,22 +35,41 @@
 											<label for="nama_barang"><strong>Nama Barang</strong></label>
 											</div>
 											<div class="form-group col-md-8">
-                                            <select name="id" id="" class="form-control" required>
-											<option value="">Pilih Barang</option>
+                                            <select name="id" id="pilihBarang" class="form-control" required>
+											<option value="" disabled selected>Pilih Barang</option>
 												<?php foreach ($all_barang as $barang): ?>
 													<option value="<?= $barang->id ?>"><?= $barang->nama_barang ?></option>
 												<?php endforeach ?>
                                             </select>
 											</div>
 									</div>
-									<div class="form-row">
+									<div class="form-row" id="stokRusak">
 										<div class="form-group col-md-4">
 											<label for="stok_rusak"><strong>Jumlah</strong></label>
 										</div>
 										<div class="form-group col-md-8">
-											<input type="number" name="stok_rusak" placeholder="Masukkan Jumlah" autocomplete="off"  class="form-control" step="0.00001"  required>
+										<div class="input-group">
+											<input type="number" id="jumlahRusak"  name="stok_rusak"  autocomplete="off"  class="form-control" value="0" disabled>
+											<div class="input-group-append">
+												<div class="input-group-text">Kg</div>
+											</div>
+										</div>
 										</div>
                                     </div>
+									<div class="form-row" id="rusakBaru">
+										<div class="form-group col-md-4">
+											<label for=""><strong>Rusak Baru</strong></label>
+										</div>
+										<div class="form-group col-md-8">
+										<div class="input-group">
+											<input type="number" name="rusakBaru"  placeholder="Masukkan Rusak Baru" class="form-control" required>
+											<div class="input-group-append">
+														<div class="input-group-text">Kg</div>
+													</div>
+										</div>
+										</div>
+										
+									</div>
                         
                                       </div>
 									</div>
@@ -58,7 +77,7 @@
 									<hr>
 									<div class="form-group">
 										<button type="submit" class="btn btn-primary"><i class="fa fa-save"></i>&nbsp;&nbsp;Simpan</button>
-										<button type="reset" class="btn btn-danger"><i class="fa fa-times"></i>&nbsp;&nbsp;Batal</button>
+										<button id="batal" type="reset" class="btn btn-danger"><i class="fa fa-times"></i>&nbsp;&nbsp;Batal</button>
 									</div>
 								</form>
 							</div>				
@@ -67,10 +86,41 @@
 				</div>
 				</div>
 			</div>
-			<!-- load footer -->
+			
 			<?php $this->load->view('partials/footer.php') ?>
 		</div>
 	</div>
 	<?php $this->load->view('partials/js.php') ?>
+
+	<script>
+		$(document).ready(function(){
+			document.getElementById("rusakBaru").style.display = "none";
+			$("#pilihBarang").on('change',function(){
+				const id = this.value;
+				const xmlHttp = new XMLHttpRequest();
+
+				xmlHttp.open("GET","<?= base_url('Barang/barangRusak/') ?>" +id);
+				xmlHttp.onload = function(){
+					if(this.status == 200){
+						const result = JSON.parse(xmlHttp.response);
+						console.log(result);
+						document.getElementById("jumlahRusak").value = result['stok_rusak'];
+					}
+				}
+				xmlHttp.send();
+
+				if(this.value != null){
+					$("#rusakBaru").show();
+				}else{
+					$("#rusakBaru").hide();
+				}
+			});
+
+			$("#batal").on('click',function(){
+				$("#rusakBaru").hide();
+			});
+		});
+	</script>
+
 </body>
 </html>

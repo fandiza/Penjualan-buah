@@ -142,30 +142,26 @@ class Barang extends CI_Controller{
 			redirect('penjualan');
 		}
 
-		$data = [
-			'id' => $this->input->post('id'),
-			'nama_barang' => $this->input->post('nama_barang'),
-			'harga_beli' => $this->input->post('harga_beli'),
-			'harga_jual' => $this->input->post('harga_jual'),
-			'stok' => $this->input->post('stok'),
-			'stok_rusak' => $this->input->post('stok_rusak'),
-			'satuan' => $this->input->post('satuan'),
+		$id = $this->input->post('id');
+		$data = $this->db->get_where('barang', ['id' => $this->input->post('id')])->row_array();
+		$stok = $data['stok'] - $this->input->post('rusakBaru');
+		$stokRusak = $data['stok_rusak'] + $this->input->post('rusakBaru');
+
+		$update = [
+			'stok' => $stok,
+			'stok_rusak' => $stokRusak
 		];
 
-		if($this->m_barang->ubah($data,$id)){
-			$id = $this->input->post('id');
-			$jumlah = $this->input->post('stok_rusak');
-			$stok = $this->m_barang->get_stok_by_id($id);
-			
-			$total = $stok - $jumlah;
-			$this->m_barang->ubah_stok($total, $jumlah, $id);
-			$this->session->set_flashdata('success', 'Data Barang Rusak <strong>Berhasil</strong> Ditambahkan!');
-			redirect('barang');
-		} else {
-			$this->session->set_flashdata('error', 'Data Barang Rusak <strong>Gagal</strong> Ditambahkan!');
-			redirect('barang');
-		}
+		$this->m_barang->ubah($update, $id);
+		$this->session->set_flashdata('success', 'Data Barang Rusak <strong>Berhasil</strong> Ditambahkan!');
+		redirect('barang');
 	}
+
+	public function barangRusak($id){
+		$getData = $this->db->get_where('barang', ['id' => $id])->row_array();
+		echo json_encode($getData);
+	}
+
 	public function pdf(){
 
 			$data['filter_barang'] = $this->m_barang->lihat();

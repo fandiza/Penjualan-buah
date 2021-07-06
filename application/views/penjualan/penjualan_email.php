@@ -36,13 +36,14 @@ table {
 
 
         <b>
-            <h3><b><p style="text-align:center;margin:0;padding:0">Data Barang Masuk</p></b></h3>
+            <h3><b><p style="text-align:center;margin:0;padding:0">Data Penjualan</p></b></h3>
         </b>
         <br>
         <center>
             <b>
-                <?php echo $title ?> <br>
-                <?php echo $subtitle ?> <br>
+                <?= $title ?> <br>
+                <?= $subtitle ?> <br>
+               
             </b>
         </center>
         <br>
@@ -50,34 +51,27 @@ table {
             <thead>
                 <tr>
                     <th class="text-primary" style=" text-align: center; ">No</th>
-                    <th class="text-primary" style=" text-align: center; ">Barang</th>
-                    <th class="text-primary" style=" text-align: center; ">Tgl. Masuk</th>
-                    <th class="text-primary" style=" text-align: center; ">Kadaluarsa</th>
-                    <th class="text-primary" style=" text-align: center; ">Jumlah</th>
-                    <th class="text-primary" style=" text-align: center; ">Supplier</th>
-                    <th class="text-primary" style=" text-align: center; ">User</th>
+                    <th class="text-primary" style=" text-align: center; ">No Penjualan</th>
+                    <th class="text-primary" style=" text-align: center; ">Nama Kasir</th>
+                    <th class="text-primary" style=" text-align: center; ">Tanggal Penjualan</th>
+                    <th class="text-primary" style=" text-align: center; ">Jam Penjualan</th>
+                    <th class="text-primary" style=" text-align: center; ">Total</th>
+                    
                   
                 </tr>
             </thead>
             <tbody>
-                <?php $no = 1;
-                        foreach ($filter_barangmasuk as $bm) : ?>
+            <?php $no = 1;
+              foreach ($email_penjualan as $ep) : ?>
                 <tr>
                     <td style=" text-align: center;"><?= $no++ ?></td>
-                    <td style=" text-align: center;"><?= $bm->nama_barang ?></td>
-                    <td style=" text-align: center;">
-                        <?=  date('d-m-Y ', strtotime($bm->tanggalmasuk)); ?></td>
-                    </td>
-                    <td style=" text-align: center;">
-                        <?=  date('d-m-Y ', strtotime($bm->exp)); ?></td>
-                    </td>
-                    <td style=" text-align: center;"><?= $bm->jumlah ?> Kg</td>
-                    <td style=" text-align: center;"><?= $bm->nama_sup ?></td>
-                    <td style=" text-align: center;"><?= $bm->nama ?></td>
+                    <td style=" text-align: center;"><?= $ep['no_penjualan'] ?></td>
+                    <td style=" text-align: center;"><?= $ep['nama_kasir'] ?></td>
+                    <td style=" text-align: center;"><?= $ep['tgl_penjualan'] ?></td>
+                    <td style=" text-align: center;"><?= $ep['jam_penjualan'] ?></td>
+                    <td style=" text-align: center;"><?= $ep['total'] ?></td>
                 </tr>
-
                 <?php endforeach ?>
-
             </tbody>
 
 

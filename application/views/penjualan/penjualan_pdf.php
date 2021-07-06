@@ -62,8 +62,6 @@ table {
                     <th class="text-primary" style=" text-align: center; ">Tanggal Penjualan</th>
                     <th class="text-primary" style=" text-align: center; ">Jam Penjualan</th>
                     <th class="text-primary" style=" text-align: center; ">Total</th>
-                    
-                  
                 </tr>
             </thead>
             <tbody>
@@ -71,17 +69,18 @@ table {
                         foreach ($filter_penjualan as $fp) : ?>
                 <tr>
                     <td style=" text-align: center;"><?= $no++ ?></td>
-                    <td style=" text-align: center;"><?= $fp->no_penjualan ?></td>
-                    <td style=" text-align: center;"><?= $fp->nama_kasir ?></td>
-                    <td style=" text-align: center;"><?= $fp->tgl_penjualan ?></td>
-                    <td style=" text-align: center;"><?= $fp->jam_penjualan ?></td>
-                    <td style=" text-align: center;"><?= $fp->total ?></td>
+                    <td style=" text-align: center;"><?= $fp['no_penjualan'] ?></td>
+                    <td style=" text-align: center;"><?= $fp['nama_kasir'] ?></td>
+                    <td style=" text-align: center;"><?= format_indo($fp['tgl_penjualan']) ?></td>
+                    <td style=" text-align: center;"><?= $fp['jam_penjualan'] ?></td>
+                    <td style=" text-align: left;">Rp. <?= number_format($fp['total'],0,',','.') ?></td>
                 </tr>
 
                 <?php endforeach ?>
 
             </tbody>
-
+            
+                <h3>Total Pendapatan : </h3> <?= $total_pendapatan['harian'] ?>
 
         </table>
 

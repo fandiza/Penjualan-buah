@@ -12,6 +12,8 @@ class Penjualan extends CI_Controller {
 		$this->load->model('M_barangmasuk', 'm_barangmasuk');
 		$this->load->model('M_penjualan', 'm_penjualan');
 		$this->load->model('M_detail_penjualan', 'm_detail_penjualan');
+		$this->load->model('M_toko','m_toko');
+		$this->load->model('M_laporanharian','m_laporanharian');
 		$this->load->library('pdf');
 		$this->data['aktif'] = 'penjualan';
 	}
@@ -32,6 +34,7 @@ class Penjualan extends CI_Controller {
 
 	public function proses_tambah(){
 		$jumlah_barang_dibeli = count($this->input->post('nama_barang_hidden'));
+		$this->load->view('penjualan/cetak_detail',$this->data);
 		
 		$data_penjualan = [
 			'no_penjualan' => $this->input->post('no_penjualan'),
@@ -99,32 +102,104 @@ class Penjualan extends CI_Controller {
 		$this->load->view('penjualan/keranjang');
 	}
 
-	public function export(){
-		$dompdf = new Dompdf();
-		// $this->data['perusahaan'] = $this->m_usaha->lihat();
-		$this->data['all_penjualan'] = $this->m_penjualan->lihat();
-		$this->data['title'] = 'Laporan Data Penjualan';
-		$this->data['no'] = 1;
+	public function export_detail($no_penjualan){
+		//$dompdf = new Dompdf();
+		$data['penjualan'] = $this->m_penjualan->lihat_no_penjualan($no_penjualan);
+		$data['all_detail_penjualan'] = $this->m_detail_penjualan->lihat_no_penjualan($no_penjualan);
+		$data['no'] = 1;
 
-		$dompdf->setPaper('A4', 'Landscape');
-		$html = $this->load->view('penjualan/report', $this->data, true);
-		$dompdf->load_html($html);
-		$dompdf->render();
-		$dompdf->stream('Laporan Data Penjualan Tanggal ' . date('d F Y'), array("Attachment" => false));
+		$this->pdf->set_option('isRemoteEnabled', true);
+        $this->load->library('pdf');
+        $this->pdf->setPaper('A4', 'potrait');
+        $this->pdf->filename = "Laporan.pdf";
+        $this->pdf->load_view('penjualan/cetak_detail', $data);
 	}
 
 	public function filter(){
-        $tanggalawal = $this->input->post('tanggalawal');
+
+		$tanggalawal = $this->input->post('tanggalawal');
         $tanggalakhir = $this->input->post('tanggalakhir');
+		
+		if (isset($_POST['sendEmail'])) {
+			$this->sendMail($tanggalawal,$tanggalakhir);
+		}
+		
+		$data['filter_penjualan'] = $this->m_penjualan->filterbytanggal($tanggalawal,$tanggalakhir);
+		$data['total_pendapatan'] = $this->m_laporanharian->filterByDate($tanggalawal,$tanggalakhir);
+        $data['title'] = "Laporan Penjualan";
+        $data['subtitle'] = "Dari tanggal : ".format_indo($tanggalawal).' Sampai tanggal : '.format_indo($tanggalakhir);
+        $this->pdf->set_option('isRemoteEnabled', true);
+        $this->load->library('pdf');
+        $this->pdf->setPaper('A4', 'potrait');
+        $this->pdf->filename = "Laporan Penjualan.pdf";
+        $this->pdf->load_view('penjualan/penjualan_pdf', $data);
 
-			$data['filter_penjualan'] = $this->m_penjualan->filterbytanggal($tanggalawal,$tanggalakhir);
-            $data['title'] = "Laporan Penjualan Filter Berdasarkan Tanggal";
-            $data['subtitle'] = "Dari tanggal : ".$tanggalawal.' Sampai tanggal : '.$tanggalakhir;
-            $this->pdf->set_option('isRemoteEnabled', true);
-            $this->load->library('pdf');
-            $this->pdf->setPaper('A4', 'potrait');
-            $this->pdf->filename = "Laporan Penjualan.pdf";
-            $this->pdf->load_view('penjualan/penjualan_pdf', $data);
+	}
+	private function sendMail($tanggalawal,$tanggalakhir)
+	{	
+		$singleSendMail = true;
+		$emailtoko = $this->m_penjualan->getDataToko();
+		$item = $emailtoko;
+		$singleSendMail = $this->singleSendMail($item,$tanggalawal,$tanggalakhir);
 
+		if ($singleSendMail) {
+			$this->session->set_flashdata('success', 'Sukses! email berhasil dikirim.');
+			redirect('penjualan');
+		} else {
+			$this->session->set_flashdata('error', 'Email gagal dikirim.');
+			redirect('penjualan');
+		}
+	}
+
+	private function singleSendMail($item,$dateawal,$dateakhir)
+	{
+		$data['no'] = 1;
+        $data['title'] = "Laporan Penjualan";
+		$data['email_penjualan'] = $this->m_penjualan->filterbytanggal($dateawal,$dateakhir);
+        $data['subtitle'] = "Dari tanggal : ".format_indo($tanggalawal).' Sampai tanggal : '.format_indo($tanggalakhir);
+
+		$msgpdf = $this->load->view('penjualan/penjualan_email', $data, true);
+
+		$this->load->library('pdf');
+		$dompdf = new Dompdf();
+		$dompdf->loadHtml($msgpdf);
+		$dompdf->set_option('isRemoteEnabled', true);
+		$dompdf->set_option('isHtml5ParserEnabled', true);
+		$dompdf->setPaper('A4', 'portrait');
+		$dompdf->render();
+		$output = $dompdf->output();
+		$filename = '';
+		$filename = 'Laporan Penjualan.pdf';
+		if (file_exists(base_url('assets/pdf/') . $filename)) {
+			unlink($filename);
+		}
+		file_put_contents('assets/pdf/' . $filename, $output);
+
+		$config = [
+			'mailtype'  => 'html',
+			'charset'   => 'utf-8',
+			'protocol'  => 'smtp',
+			'smtp_host' => 'smtp.gmail.com',
+			'smtp_user' => 'noviaruhu@gmail.com',
+			'smtp_pass'   => 'noviaruhu@gmail',
+			'smtp_crypto' => 'tls',
+			'smtp_port'   => 587,
+			'crlf'    => "\r\n",
+			'newline' => "\r\n"
+		];
+		$this->email->initialize($config);
+		$this->email->clear(TRUE);
+		$this->email->from('noviaruhu@gmail.com', 'akuntugas');
+		$this->email->to($item);
+		$this->email->subject('Laporan Harian');
+		$this->email->message('Laporan Penjualan');
+		$this->email->attach('assets/pdf/' . $filename);
+
+		if ($this->email->send()) {
+			return true;
+		} else {
+			echo $this->email->print_debugger();
+			die;
+		}
 	}
 }

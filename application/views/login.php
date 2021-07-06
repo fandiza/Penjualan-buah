@@ -19,6 +19,32 @@
 <!-- <link rel="icon" href="<?php echo base_url() . 'assets/buah.png' ?>"> -->
 <div class="container">
     <!-- Outer Row -->
+    <?php if ($this->session->flashdata('success')) : ?>
+					<div class="alert alert-success alert-dismissible fade show" role="alert">
+						<?= $this->session->flashdata('success') ?>
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+				<?php elseif($this->session->flashdata('error')) : ?>
+					<div class="alert alert-danger alert-dismissible fade show" role="alert">
+						<?= $this->session->flashdata('error') ?>
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+				<?php endif ?>
+
+                <?= $this->session->flashdata('message'); ?>
+
+                <?= form_error('username', '<div class="alert alert-danger alert-dismissible fade show" role="alert">', '<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>'); ?>
+                 <?= form_error('nama', '<div class="alert alert-danger alert-dismissible fade show" role="alert">', '<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>'); ?>
     <div class="row justify-content-center">
         <div class="col-xl-10 col-lg-12 col-md-9">
             <div class="card o-hidden border-0 shadow-lg my-5">

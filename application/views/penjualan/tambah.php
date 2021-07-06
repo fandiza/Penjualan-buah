@@ -130,12 +130,6 @@
 
 												</tbody>
 												<tfoot>
-													<!-- <tr>
-														 <td colspan="4" align="right"><strong>Diskon ( EXP 2 Hari lagi ) : </strong></td>
-														<td id="expdiskon"></td>
-
-														<td></td>
-													</tr> -->
 													<tr>
 														<td colspan="5" align="right"><strong>Total : </strong></td>
 														<td id="total"></td>
@@ -154,7 +148,6 @@
 													<tr>
 														<td colspan="5" align="right"><strong>Total Bayar :</strong></td>
 														<td id="total_bayar"></td>
-														
 													</tr>
 												</tfoot>
 											</table>

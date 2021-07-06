@@ -59,7 +59,7 @@
 									<tr>
 										<td><strong>Waktu Penjualan</strong></td>
 										<td>:</td>
-										<td><?= $penjualan->tgl_penjualan ?> - <?= $penjualan->jam_penjualan ?></td>
+										<td><?= format_indo($penjualan->tgl_penjualan) ?> - <?= $penjualan->jam_penjualan ?></td>
 									</tr>
 								</table>
 							</div>

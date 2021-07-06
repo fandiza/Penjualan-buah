@@ -19,6 +19,7 @@ class Toko extends CI_Controller {
 			'nama_pemilik' => $this->input->post('nama_pemilik'),
 			'no_telepon' => $this->input->post('no_telepon'),
 			'alamat' => $this->input->post('alamat'),
+			'email' => $this->input->post('email'),
 		];
 
 		if($this->m_toko->ubah($data)){

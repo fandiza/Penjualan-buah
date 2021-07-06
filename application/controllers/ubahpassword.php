@@ -23,11 +23,9 @@ class ubahpassword extends CI_Controller
 
 		$this->load->view('ubahpassword', $this->data);
 	}
+
     public function changepassword(){
        
-            $data['title'] = 'Kominfo Batu | Ubah Password';
-             // $data['user'] = $this->user_model->getUser($this->session->userdata('email'));
-            // $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->result();
             $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('login')['username']])->row_array();
     
             $this->form_validation->set_rules('current_password', 'Current Password', 'required|trim');
@@ -66,7 +64,6 @@ class ubahpassword extends CI_Controller
                         );
                         redirect('ubahpassword');
                     } else {
-                        //password sudah benar
                         
                         $password_hash = md5($new_password);
                         $this->db->set('password', $password_hash);
@@ -76,13 +73,13 @@ class ubahpassword extends CI_Controller
                         $this->session->set_flashdata(
                             'message',
                             '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                              Password berhasil di ubah
+                              Password berhasil di ubah. Silahkan Login Kembali!
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>'
                         );
-                        redirect('ubahpassword');
+                        redirect('logout');
                     }
                 }
             }

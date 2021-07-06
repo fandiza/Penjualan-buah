@@ -39,16 +39,31 @@ class M_Laporanbulanan extends CI_Model {
     }
 
     public function filterByMonth($start, $end){
+
+        $bulanawal = date("m",strtotime($start));
+        $bulanakhir = date("m",strtotime($end));
+
+        $tahunawal = date("Y",strtotime($start));
+        $tahunakhir = date("Y",strtotime($end));
+
         $query = "SELECT ROUND(SUM(p.total)) as harian, ROUND(SUM(dp.jumlah_barang)) as totbarang, COUNT(p.id) as total, dp.nama_barang as namabuah, COUNT(dp.nama_barang) as nama
         FROM penjualan as p
         INNER JOIN detail_penjualan as dp ON p.no_penjualan = dp.no_penjualan
-        WHERE YEAR(NOW()) = YEAR(NOW()) AND MONTH(p.tgl_penjualan) BETWEEN $start AND $end
+        WHERE YEAR(p.tgl_penjualan) BETWEEN $tahunawal AND $tahunakhir AND MONTH(p.tgl_penjualan) BETWEEN $bulanawal AND $bulanakhir
         ";
 
         return $this->db->query($query)->row_array();
     }
+
     public function getDataByMonth($start, $end){
-        $query = "SELECT dp.nama_barang as nama_barang , p.tgl_penjualan as tanggal_penjualan,  dp.harga_barang as harga_barang, dp.jumlah_barang as jumlah, dp.sub_total as total FROM detail_penjualan as dp INNER JOIN penjualan as p ON dp.no_penjualan = p.no_penjualan  WHERE YEAR(NOW()) = YEAR(NOW()) AND MONTH(p.tgl_penjualan) BETWEEN $start AND $end";
+
+        $bulanawal = date("m",strtotime($start));
+        $bulanakhir = date("m",strtotime($end));
+
+        $tahunawal = date("Y",strtotime($start));
+        $tahunakhir = date("Y",strtotime($end));
+
+        $query = "SELECT dp.nama_barang as nama_barang , p.tgl_penjualan as tanggal_penjualan,  dp.harga_barang as harga_barang, dp.jumlah_barang as jumlah, dp.sub_total as total FROM detail_penjualan as dp INNER JOIN penjualan as p ON dp.no_penjualan = p.no_penjualan  WHERE YEAR(p.tgl_penjualan) BETWEEN $tahunawal AND $tahunakhir AND MONTH(p.tgl_penjualan) BETWEEN $bulanawal AND $bulanakhir";
 
         return $this->db->query($query)->result_array();
     }

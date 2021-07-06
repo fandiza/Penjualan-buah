@@ -175,43 +175,13 @@
 					<div class="col-lg-12 mx-auto">
 						<div class="form-row">
 							<div class="col-5">
-								<!-- <input id="start" class="form-control" type="month"> -->
-								<select id="start" class="custom-select">
-									<option selected disabled value="">Pilih Bulan</option>
-									<option value="1">Januari</option>
-									<option value="2">Februari</option>
-									<option value="3">Maret</option>
-									<option value="4">April</option>
-									<option value="5">Mei</option>
-									<option value="6">Juni</option>
-									<option value="7">Juli</option>
-									<option value="8">Agustus</option>
-									<option value="9">September</option>
-									<option value="10">Oktober</option>
-									<option value="11">November</option>
-									<option value="12">Desember</option>
-								</select>
+								<input id="start" class="form-control" type="month">
 							</div>
 							<div class="col-2"> 
 								<p>Sampai</p>
 							</div>
 							<div class="col-5">
-							<!-- <input id="end" class="form-control" type="month"> -->
-								<select id="end" class="custom-select">
-									<option selected disabled value="">Pilih Bulan</option>
-									<option value="1">Januari</option>
-									<option value="2">Februari</option>
-									<option value="3">Maret</option>
-									<option value="4">April</option>
-									<option value="5">Mei</option>
-									<option value="6">Juni</option>
-									<option value="7">Juli</option>
-									<option value="8">Agustus</option>
-									<option value="9">September</option>
-									<option value="10">Oktober</option>
-									<option value="11">November</option>
-									<option value="12">Desember</option>
-								</select>
+							<input id="end" class="form-control" type="month">
 							</div>
 						</div>
 					</div>
@@ -226,9 +196,11 @@
 	<?php $this->load->view('partials/js.php') ?>
 	<script>
 		$(document).ready(function(){
+			$("#tableDataMonth").hide();
 			$(document).on('click', '#aturBulan', function(e) {
 				var start = document.getElementById("start").value;
 				var end = document.getElementById("end").value;
+
 				if (end == null || end == "") {
 					end = document.getElementById("start").value;
 				} else if (start == null || start == "") {
@@ -242,7 +214,7 @@
 				xmlHttp.onload = function(){
 					if(this.status == 200){
 						const result = JSON.parse(xmlHttp.response);
-						console.log(result);
+						
 						if (result['harian'] == null && result['totbarang'] == null && result['total'] == 0 && result['namabuah'] == null) {
 							document.getElementById("pendapatan").innerHTML = "Data Tidak Ada"	
 							document.getElementById("barangTerjual").innerHTML = "0"
@@ -262,7 +234,7 @@
 				xmlHttp2.onload = function() {
 					if (this.status == 200) {
 						const result = JSON.parse(xmlHttp2.response);
-						console.log(result);
+						
 						$('#dataDay').DataTable({
 							responsive: true,
 							data: result,

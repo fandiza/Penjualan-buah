@@ -24,10 +24,10 @@
 								<h1 class="h3 m-0 text-gray-800">Laporan Harian</h1>
 							</div>
 						</div>
-						<div class="col-8">
+						<div class="col-7">
 							<p class="float-right" id="notice"></p>
 						</div>
-						<div class="col-1">
+						<div class="col-2">
 						<div class="float-right">
 							<button type="button" data-toggle="modal" data-target="#filterHari" class="btn btn-success">Filter</button>
 						</div>

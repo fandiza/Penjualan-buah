@@ -6,12 +6,12 @@
 
 <body id="page-top">
 	<div id="wrapper">
-		<!-- load sidebar -->
+		
 		<?php $this->load->view('partials/sidebar.php') ?>
 
 		<div id="content-wrapper" class="d-flex flex-column">
 			<div id="content" data-url="<?= base_url('admin') ?>">
-				<!-- load Topbar -->
+				
 				<?php $this->load->view('partials/topbar.php') ?>
 
 				<div class="container-fluid">
@@ -65,7 +65,7 @@
 				</div>
 				</div>
 			</div>
-			<!-- load footer -->
+			
 			<?php $this->load->view('partials/footer.php') ?>
 		</div>
 	</div>

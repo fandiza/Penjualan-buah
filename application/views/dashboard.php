@@ -36,6 +36,16 @@
 						</button>
 					</div>
 				<?php endif ?>
+				<?= $this->session->flashdata('message'); ?>
+
+            <?= form_error('username', '<div class="alert alert-danger alert-dismissible fade show" role="alert">', '<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>'); ?>
+            <?= form_error('nama', '<div class="alert alert-danger alert-dismissible fade show" role="alert">', '<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>'); ?>
 				<div class="row">
 
 		            <!-- Earnings (Monthly) Card Example -->
@@ -124,6 +134,8 @@
 								<input  type="text" value="<?= $toko->nama_pemilik ?>" readonly class="form-control mt-2 mb-2">
 								<strong>No Telepon : </strong><br>
 								<input  type="text" value="<?= $toko->no_telepon ?>" readonly class="form-control mt-2 mb-2">
+								<strong>Email : </strong><br>
+								<input type="text" value="<?= $toko->email ?>" readonly class="form-control mt-2 mb-2">
 								<strong>Alamat : </strong><br>
 								<input  type="text" value="<?= $toko->alamat ?>" readonly class="form-control mt-2">
 							</div>				
@@ -134,9 +146,9 @@
 							<div class="card-header"><strong>User Sedang Login</strong></div>
 							<div class="card-body">
 								<strong>Nama : </strong><br>
-								<input type="text" value="<?= $this->session->login['nama'] ?>" readonly class="form-control mt-2 mb-2">
+								<input type="text" value="<?= $this->session->userdata('login')['nama'] ?>" readonly class="form-control mt-2 mb-2">
 								<strong>Username : </strong><br>
-								<input type="text" value="<?= $this->session->login['username'] ?>" readonly class="form-control mt-2 mb-2">
+								<input type="text" value="<?= $this->session->userdata('login')['username'] ?>" readonly class="form-control mt-2 mb-2">
 								<strong>Level : </strong><br>
 								<input type="text" value="<?= $this->session->login['level'] ?>" readonly class="form-control mt-2 mb-2">
 								<strong>Jam Login : </strong><br>
