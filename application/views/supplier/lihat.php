@@ -20,10 +20,7 @@
 						<h1 class="h3 m-0 text-gray-800"><?= $title ?></h1>
 					</div>
 					<div class="float-right">
-						<?php if ($this->session->login['level'] == 'admin'): ?>
-							
 							<a href="<?= base_url('supplier/tambah') ?>" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i>&nbsp;&nbsp;Tambah</a>
-						<?php endif ?>
 					</div>
 				</div>
 				<hr>

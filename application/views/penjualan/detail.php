@@ -20,7 +20,7 @@
 						<h1 class="h3 m-0 text-gray-800"><?= $title ?></h1>
 					</div>
 					<div class="float-right">
-						<a href="<?= base_url('penjualan/export_detail/' . $penjualan->no_penjualan) ?>" class="btn btn-danger btn-sm"><i class="fa fa-file-pdf"></i>&nbsp;&nbsp;Export</a>
+						<a target="_BLANK" href="<?= base_url('penjualan/export_detail/' . $penjualan->no_penjualan) ?>" class="btn btn-danger btn-sm"><i class="fa fa-file-pdf"></i>&nbsp;&nbsp;Export</a>
 						<a href="<?= base_url('penjualan') ?>" class="btn btn-secondary btn-sm"><i class="fa fa-reply"></i>&nbsp;&nbsp;Kembali</a>
 					</div>
 				</div>

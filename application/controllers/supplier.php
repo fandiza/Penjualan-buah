@@ -19,21 +19,12 @@ class supplier extends CI_Controller{
 	}
 
 	public function tambah(){
-		if ($this->session->login['level'] == 'supplier'){
-			$this->session->set_flashdata('error', 'Tambah data hanya untuk admin!');
-			redirect('penjualan');
-		}
-
 		$this->data['title'] = 'Tambah supplier';
 
 		$this->load->view('supplier/tambah', $this->data);
 	}
 
 	public function proses_tambah(){
-		if ($this->session->login['level'] == 'supplier'){
-			$this->session->set_flashdata('error', 'Tambah data hanya untuk admin!');
-			redirect('penjualan');
-		}
 
 		$data = [
 			
@@ -52,10 +43,6 @@ class supplier extends CI_Controller{
 	}
 
 	public function ubah($id_supplier){
-		if ($this->session->login['level'] == 'supplier'){
-			$this->session->set_flashdata('error', 'Ubah data hanya untuk admin!');
-			redirect('penjualan');
-		}
 
 		$this->data['title'] = 'Ubah supplier';
 		$this->data['supplier'] = $this->m_supplier->lihat_id($id_supplier);
@@ -65,11 +52,6 @@ class supplier extends CI_Controller{
 	}
 
 	public function proses_ubah($id_supplier){
-		if ($this->session->login['level'] == 'supplier'){
-			$this->session->set_flashdata('error', 'Ubah data hanya untuk admin!');
-			redirect('penjualan');
-		}
-
 		$data = [
 			
             'nama_sup' => $this->input->post('nama_sup'),
@@ -87,11 +69,6 @@ class supplier extends CI_Controller{
 	}
 
 	public function hapus($id_supplier){
-		if ($this->session->login['level'] == 'supplier'){
-			$this->session->set_flashdata('error', 'Hapus data hanya untuk admin!');
-			redirect('penjualan');
-		}
-
 		if($this->m_supplier->hapus($id_supplier)){
 			$this->session->set_flashdata('success', 'Data supplier <strong>Berhasil</strong> Dihapus!');
 			redirect('supplier');

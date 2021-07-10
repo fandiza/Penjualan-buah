@@ -21,11 +21,9 @@
 							<h1 class="h3 m-0 text-gray-800"><?= $title ?></h1>
 						</div>
 						<div class="float-right">
-							<?php if ($this->session->login['level'] == 'admin') : ?>
 								<a href="<?= base_url('barang/pdf') ?>" class="btn btn-danger btn-sm"><i class="fa fa-file-pdf"></i>&nbsp;&nbsp;Export</a>
 								<a href="<?= base_url('barang/tambah') ?>" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i>&nbsp;&nbsp;Tambah Baru</a>
 								<a href="<?= base_url('barang/barang_rusak') ?>" class="btn btn-warning btn-sm"><i class="fa fa-plus"></i>&nbsp;&nbsp;Barang Rusak</a>
-							<?php endif ?>
 						</div>
 					</div>
 					<hr>
@@ -57,9 +55,7 @@
 											<td>Harga Jual</td>
 											<td>Stok Tersisa</td>
 											<td>Stok Rusak</td>
-											<?php if ($this->session->login['level'] == 'admin') : ?>
-												<td>Aksi</td>
-											<?php endif ?>
+											<td>Aksi</td>
 										</tr>
 									</thead>
 									<tbody>
@@ -72,10 +68,8 @@
 												<td><?= $barang->stok ?> <?= strtoupper($barang->satuan) ?></td>
 												<td><?= $barang->stok_rusak ?> <?= strtoupper($barang->satuan) ?></td>
 												<td>
-													<?php if ($this->session->login['level'] == 'admin') : ?>
 														<a href="<?= base_url('barang/ubah/' . $barang->id) ?>" class="btn btn-success btn-sm"><i class="fa fa-pen"></i></a>
 														<a onclick="return confirm('apakah anda yakin?')" href="<?= base_url('barang/hapus/' . $barang->id) ?>" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
-													<?php endif ?>
 												</td>
 											</tr>
 										<?php endforeach ?>

@@ -26,7 +26,7 @@ class Penjualan extends CI_Controller {
 	}
 
 	public function tambah(){
-		$this->data['title'] = 'Tambah Penjualan';
+		$this->data['title'] = 'Tambah Transaksi';
 		$this->data['all_barang'] = $this->m_barang->lihat_stok();
 
 		$this->load->view('penjualan/tambah', $this->data);
@@ -62,7 +62,7 @@ class Penjualan extends CI_Controller {
 				$this->m_barang->min_stok($data_detail_penjualan[$i]['jumlah_barang'], $data_detail_penjualan[$i]['nama_barang']) or die('gagal min stok');
 			}
 			$this->session->set_flashdata('success', 'Invoice <strong>Penjualan</strong> Berhasil Dibuat!');
-			redirect('penjualan');
+			redirect('penjualan/detail/'.$data_penjualan['no_penjualan']);
 		} else {
 			$this->session->set_flashdata('success', 'Invoice <strong>Penjualan</strong> Berhasil Dibuat!');
 			redirect('penjualan');
@@ -103,16 +103,19 @@ class Penjualan extends CI_Controller {
 	}
 
 	public function export_detail($no_penjualan){
-		//$dompdf = new Dompdf();
+		$data['dataToko'] = $this->m_toko->lihat();
 		$data['penjualan'] = $this->m_penjualan->lihat_no_penjualan($no_penjualan);
 		$data['all_detail_penjualan'] = $this->m_detail_penjualan->lihat_no_penjualan($no_penjualan);
-		$data['no'] = 1;
 
-		$this->pdf->set_option('isRemoteEnabled', true);
-        $this->load->library('pdf');
-        $this->pdf->setPaper('A4', 'potrait');
-        $this->pdf->filename = "Laporan.pdf";
-        $this->pdf->load_view('penjualan/cetak_detail', $data);
+        $this->load->view('penjualan/cetak_detail', $data);
+
+		$html = $this->output->get_output();
+
+		$this->load->library('pdf');
+		$this->pdf->load_html($html);
+		$this->pdf->render();
+		$this->pdf->stream("cetak-nota".".pdf",array('Attachment' => 0));
+		
 	}
 
 	public function filter(){
