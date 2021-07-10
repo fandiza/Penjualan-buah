@@ -32,10 +32,10 @@
 								<form action="<?= base_url('kasir/proses_tambah') ?>" id="form-tambah" method="POST">
 									<div class="form-row">
 										<div class="form-group col-md-6">
-											<label for="nama_kasir"><strong>Nama Kasir</strong></label>
+											<label for="nama_kasir"><strong>Nama Karyawan</strong></label>
 											</div>
 											<div class="form-group col-md-6">
-											<input type="text" name="nama" placeholder="Masukkan Nama Kasir" autocomplete="off"  class="form-control" required>
+											<input type="text" name="nama" placeholder="Masukkan Nama Karyawan" autocomplete="off"  class="form-control" required>
 										</div>
 									</div>
 									<div class="form-row">

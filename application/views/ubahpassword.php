@@ -79,6 +79,7 @@
 </div>
 </div>
 			<!-- load footer -->
-			<?php $this->load->view('partials/footer.php') ?>
+			
 		</div>
+        <?php $this->load->view('partials/footer.php') ?>
 </div>

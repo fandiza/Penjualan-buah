@@ -11,7 +11,7 @@ class Kasir extends CI_Controller{
 	}
 
 	public function index(){
-		$this->data['title'] = 'Data Kasir';
+		$this->data['title'] = 'Data Karyawan';
 		$this->data['all_kasir'] = $this->m_user->lihat();
 		$this->data['no'] = 1;
 
@@ -24,7 +24,7 @@ class Kasir extends CI_Controller{
 			redirect('penjualan');
 		}
 
-		$this->data['title'] = 'Tambah Kasir';
+		$this->data['title'] = 'Tambah Karyawan';
 
 		$this->load->view('kasir/tambah', $this->data);
 	}
@@ -58,7 +58,7 @@ class Kasir extends CI_Controller{
 			redirect('penjualan');
 		}
 
-		$this->data['title'] = 'Ubah Kasir';
+		$this->data['title'] = 'Ubah Karyawan';
 		$this->data['kasir'] = $this->m_user->lihat_id($id);
 
 		$this->load->view('kasir/ubah', $this->data);

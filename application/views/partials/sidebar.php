@@ -29,12 +29,14 @@
 					<i class="fas fa-fw fa-people-carry"></i>
 					<span>Supplier</span></a>
 			</li>
-
+			<?php if ($this->session->login['level'] == 'admin'): ?>
 			<li class="nav-item <?= $aktif == 'kasir' ? 'active' : '' ?>">
 				<a class="nav-link" href="<?= base_url('kasir') ?>">
 					<i class="fas fa-fw fa-user"></i>
-					<span>Kasir</span></a>
+					<span>Karyawan</span></a>
 			</li>
+			<?php endif; ?>
+			<?php if ($this->session->login['level'] == 'admin'): ?>
 			<li class="nav-item <?= $aktif == 'laporan_harian' ? 'active' : '' ?>">
 				<a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseMaster" aria-expanded="true" aria-controls="collapseMaster">
 					<i class="fas fa-fw fa-user"></i>
@@ -47,6 +49,8 @@
                     </div>
                 </div>
 			</li>
+			<?php endif; ?>
+
 
 			<!-- Divider -->
 			<hr class="sidebar-divider">
@@ -74,11 +78,11 @@
 					Pengaturan
 				</div>
 
-				<li class="nav-item <?= $aktif == 'admin' ? 'active' : '' ?>">
+				<!-- <li class="nav-item <?= $aktif == 'admin' ? 'active' : '' ?>">
 					<a class="nav-link" href="<?= base_url('admin') ?>">
 						<i class="fas fa-fw fa-user-cog"></i>
 						<span>Manajemen Admin</span></a>
-				</li>
+				</li> -->
 
 				<li class="nav-item <?= $aktif == 'toko' ? 'active' : '' ?>">
 					<a class="nav-link" href="<?= base_url('toko') ?>">

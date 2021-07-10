@@ -50,11 +50,11 @@
 								<thead>
 									<tr>
 										<td>No</td>
-										<td>Nama Kasir</td>
+										<td>Nama Karyawan</td>
 										<td>Username</td>
 										<td>Terakhir Login</td>
 										<?php if ($this->session->login['level'] == 'admin'): ?>
-											<td>Password</td>
+											<!-- <td>Password</td> -->
 											<td>Aksi</td>
 										<?php endif ?>
 									</tr>
@@ -68,7 +68,7 @@
 											<td><?= $kasir->username ?></td>
 											<td><?= $kasir->last_login ?></td>
 											<?php if ($this->session->login['level'] == 'admin'): ?>
-												<td><?= $kasir->password ?></td>
+												<!-- <td><?= $kasir->password ?></td> -->
 												<td>
 													<a href="<?= base_url('kasir/ubah/' . $kasir->id_user) ?>" class="btn btn-success btn-sm"><i class="fa fa-pen"></i></a>
 													<a onclick="return confirm('apakah anda yakin?')" href="<?= base_url('kasir/hapus/' . $kasir->id_user) ?>" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>

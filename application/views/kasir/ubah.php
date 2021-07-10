@@ -35,10 +35,10 @@
 										
 									<div class="form-row">
 									<div class="form-group col-md-4">
-											<label for="nama_kasir"><strong>Nama Kasir</strong></label>
+											<label for="nama_kasir"><strong>Nama Karyawan</strong></label>
 											</div>
 											<div class="form-group col-md-8">
-											<input type="text" name="nama" placeholder="Masukkan Nama Kasir" autocomplete="off"  class="form-control" required value="<?= $kasir->nama ?>">
+											<input type="text" name="nama" placeholder="Masukkan Nama Karyawan" autocomplete="off"  class="form-control" required value="<?= $kasir->nama ?>">
 										</div>
 										<div class="form-group col-md-4">
 											<label for="username_kasir"><strong>Username</strong></label>
@@ -46,14 +46,14 @@
 											<div class="form-group col-md-8">
 											<input type="text" name="username" placeholder="Masukkan Username" autocomplete="off"  class="form-control" required value="<?= $kasir->username ?>" >
 										</div>
-										<div class="form-group col-md-4">
+										<!-- <div class="form-group col-md-4">
 											<label for="password_kasir"><strong>Password</strong></label>
-											</div>
-											<div class="form-group col-md-8">
+											</div> -->
+											<!-- <div class="form-group col-md-8">
 											<input type="text" name="password" placeholder="Masukkan Password" autocomplete="off"  class="form-control" required value="<?= $kasir->password ?>">
 										</div>
 										<input type="hidden" name="level" value="kasir">
-									</div>
+									</div> -->
 									<hr>
 									<div class="form-group">
 										<button type="submit" class="btn btn-primary"><i class="fa fa-save"></i>&nbsp;&nbsp;Simpan</button>
@@ -67,8 +67,9 @@
 				</div>
 			</div>
 			<!-- load footer -->
-			<?php $this->load->view('partials/footer.php') ?>
+			
 		</div>
+		<?php $this->load->view('partials/footer.php') ?>
 	</div>
 	<?php $this->load->view('partials/js.php') ?>
 </body>

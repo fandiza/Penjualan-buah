@@ -21,10 +21,10 @@ class Barangmasuk extends CI_Controller {
 		$this->load->view('barangmasuk/lihat', $this->data);
 	}
 	public function tambah(){
-		if ($this->session->login['level'] == 'kasir'){
-			$this->session->set_flashdata('error', 'Tambah data hanya untuk admin!');
-			redirect('penjualan');
-		}
+		// if ($this->session->login['level'] == 'kasir'){
+		// 	$this->session->set_flashdata('error', 'Tambah data hanya untuk admin!');
+		// 	redirect('penjualan');
+		// }
 
 		$this->data['title'] = 'Tambah Barang Masuk';
 		$this->data['all_barang'] = $this->m_barang->lihat();
@@ -33,10 +33,10 @@ class Barangmasuk extends CI_Controller {
 	}
 
 	public function proses_tambah(){
-		if ($this->session->login['level'] == 'kasir'){
-			$this->session->set_flashdata('error', 'Tambah data hanya untuk admin!');
-			redirect('penjualan');
-		}
+		// if ($this->session->login['level'] == 'kasir'){
+		// 	$this->session->set_flashdata('error', 'Tambah data hanya untuk admin!');
+		// 	redirect('penjualan');
+		// }
 
 		$data = [
 			'tanggalmasuk' => $this->input->post('tanggalmasuk'),
@@ -63,10 +63,10 @@ class Barangmasuk extends CI_Controller {
 	}
 
 	public function ubah($id_barang_masuk){
-		if ($this->session->login['level'] == 'kasir'){
-			$this->session->set_flashdata('error', 'Ubah data hanya untuk admin!');
-			redirect('penjualan');
-		}
+		// if ($this->session->login['level'] == 'kasir'){
+		// 	$this->session->set_flashdata('error', 'Ubah data hanya untuk admin!');
+		// 	redirect('penjualan');
+		// }
 
 		$this->data['title'] = 'Ubah Barang Masuk';
 		$this->data['barangmasuk'] = $this->m_barangmasuk->lihat_id($id_barang_masuk);
@@ -76,10 +76,10 @@ class Barangmasuk extends CI_Controller {
 	}
 
 	public function proses_ubah($id_barang_masuk){
-		if ($this->session->login['level'] == 'kasir'){
-			$this->session->set_flashdata('error', 'Ubah data hanya untuk admin!');
-			redirect('penjualan');
-		}
+		// if ($this->session->login['level'] == 'kasir'){
+		// 	$this->session->set_flashdata('error', 'Ubah data hanya untuk admin!');
+		// 	redirect('penjualan');
+		// }
 
 		$data = [
 			'tanggalmasuk' => $this->input->post('tanggalmasuk'),
@@ -106,10 +106,10 @@ class Barangmasuk extends CI_Controller {
 		}
 	}
 	public function hapus($id_barang_masuk){
-		if ($this->session->login['level'] == 'kasir'){
-			$this->session->set_flashdata('error', 'Hapus data hanya untuk admin!');
-			redirect('penjualan');
-		}
+		// if ($this->session->login['level'] == 'kasir'){
+		// 	$this->session->set_flashdata('error', 'Hapus data hanya untuk admin!');
+		// 	redirect('penjualan');
+		// }
 
 		// Logika Pengurangan Stok
 		$id_barang = $this->m_barangmasuk->get_id_barang($id_barang_masuk);
