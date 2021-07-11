@@ -46,6 +46,14 @@ class M_barang extends CI_Model{
 		return $hasil->stok;
 	}
 
+	public function getStokAwal($id){
+		$query = $this->db->select('stok_awal');
+		$query = $this->db->where(['id' => $id]);
+		$query = $this->db->get($this->_table);
+		$hasil = $query->row();
+		return $hasil->stok;
+	}
+
 	public function tambah($data){
 		return $this->db->insert($this->_table, $data);
 	}
@@ -64,8 +72,9 @@ class M_barang extends CI_Model{
 		return $query;
 	}
 
-	public function ubah_stok_barang($stok, $id){
-		$query = $this->db->set('stok', $stok);		
+	public function ubah_stok_barang($stok, $stok_awal, $id){
+		$query = $this->db->set('stok', $stok);	
+		$query = $this->db->set('stok_awal', $stok_awal);
 		$query = $this->db->where(['id' => $id]);
 		$query = $this->db->update($this->_table);
 		return $query;

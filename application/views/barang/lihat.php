@@ -55,6 +55,7 @@
 											<td>Harga Jual</td>
 											<td>Stok Tersisa</td>
 											<td>Stok Rusak</td>
+											<td>Stok Awal</td>
 											<td>Aksi</td>
 										</tr>
 									</thead>
@@ -67,6 +68,9 @@
 												<td>Rp <?= number_format($barang->harga_jual, 0, ',', '.') ?></td>
 												<td><?= $barang->stok ?> <?= strtoupper($barang->satuan) ?></td>
 												<td><?= $barang->stok_rusak ?> <?= strtoupper($barang->satuan) ?></td>
+												<td>
+													<?= $barang->stok_awal ?> <?= strtoupper($barang->satuan) ?>
+												</td>
 												<td>
 														<a href="<?= base_url('barang/ubah/' . $barang->id) ?>" class="btn btn-success btn-sm"><i class="fa fa-pen"></i></a>
 														<a onclick="return confirm('apakah anda yakin?')" href="<?= base_url('barang/hapus/' . $barang->id) ?>" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
